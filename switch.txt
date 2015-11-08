@@ -1,0 +1,399 @@
+case "mFileText":
+gui.setMFileText(textImp.getmFileText()); 
+break;
+case "mSettingsText":
+gui.setMSettingsText(textImp.getmSettingsText()); 
+break;
+case "mCodeSettingsText":
+gui.setMCodeSettingsText(textImp.getmCodeSettingsText()); 
+break;
+case "mCodeSettingsToolTipText":
+gui.setMCodeSettingsToolTipText(textImp.getmCodeSettingsToolTipText()); 
+break;
+case "mExitTooltipText":
+gui.setMExitTooltipText(textImp.getmExitTooltipText()); 
+break;
+case "mPrintSettingsText":
+gui.setMPrintSettingsText(textImp.getmPrintSettingsText()); 
+break;
+case "mPrintSettingsToolTipText":
+gui.setMPrintSettingsToolTipText(textImp.getmPrintSettingsToolTipText()); 
+break;
+case "mPrintPreviewText":
+gui.setMPrintPreviewText(textImp.getmPrintPreviewText()); 
+break;
+case "mPrintPreviewTooltipText":
+gui.setMPrintPreviewTooltipText(textImp.getmPrintPreviewTooltipText()); 
+break;
+case "mRestoDBText":
+gui.setMRestoDBText(textImp.getmRestoDBText()); 
+break;
+case "mRestoDBTooltipText":
+gui.setMRestoDBTooltipText(textImp.getmRestoDBTooltipText()); 
+break;
+case "dbNameText":
+gui.setDbNameText(textImp.getdbNameText()); 
+break;
+case "codeLabelText":
+gui.setCodeLabelText(textImp.getcodeLabelText()); 
+break;
+case "controlItemLabelText":
+gui.setControlItemLabelText(textImp.getcontrolItemLabelText()); 
+break;
+case "addSystemBText":
+gui.setAddSystemBText(textImp.getaddSystemBText()); 
+break;
+case "newCodeBText":
+gui.setNewCodeBText(textImp.getnewCodeBText()); 
+break;
+case "saveCodeBText":
+gui.setSaveCodeBText(textImp.getsaveCodeBText()); 
+break;
+case "searchControlBText":
+gui.setSearchControlBText(textImp.getsearchControlBText()); 
+break;
+case "removeControlBText":
+gui.setRemoveControlBText(textImp.getremoveControlBText()); 
+break;
+case "replaceCodeBText":
+gui.setReplaceCodeBText(textImp.getreplaceCodeBText()); 
+break;
+case "searchControlTFTooltipText":
+gui.setSearchControlTFTooltipText(textImp.getsearchControlTFTooltipText()); 
+break;
+case "removeControlTFTooltipText":
+gui.setRemoveControlTFTooltipText(textImp.getremoveControlTFTooltipText()); 
+break;
+case "replaceCodeTFTooltipText":
+gui.setReplaceCodeTFTooltipText(textImp.getreplaceCodeTFTooltipText()); 
+break;
+case "defaultCodeValue":
+gui.setDefaultCodeValue(textImp.getdefaultCodeValue()); 
+break;
+case "codeTFTooltipText":
+gui.setCodeTFTooltipText(textImp.getcodeTFTooltipText()); 
+break;
+case "controlDefaultValue":
+gui.setControlDefaultValue(textImp.getcontrolDefaultValue()); 
+break;
+case "controlTFTooltipText":
+gui.setControlTFTooltipText(textImp.getcontrolTFTooltipText()); 
+break;
+case "frameAddControlText":
+gui.setFrameAddControlText(textImp.getframeAddControlText()); 
+break;
+case "cancelBText":
+gui.setCancelBText(textImp.getcancelBText()); 
+break;
+case "frameCodeSettingsText":
+gui.setFrameCodeSettingsText(textImp.getframeCodeSettingsText()); 
+break;
+case "codeLengthLabelText":
+gui.setCodeLengthLabelText(textImp.getcodeLengthLabelText()); 
+break;
+case "codeLengthFText":
+gui.setCodeLengthFText(textImp.getcodeLengthFText()); 
+break;
+case "codeLengthFTextTooltipText":
+gui.setCodeLengthFTextTooltipText(textImp.getcodeLengthFTextTooltipText()); 
+break;
+case "codeStrengthLText":
+gui.setCodeStrengthLText(textImp.getcodeStrengthLText()); 
+break;
+case "codeTypeArrayText":
+gui.setCodeTypeArrayText(textImp.getcodeTypeArrayText()); 
+break;
+case "codeTypeTooltipText":
+gui.setCodeTypeTooltipText(textImp.getcodeTypeTooltipText()); 
+break;
+case "saveSettingsBText":
+gui.setSaveSettingsBText(textImp.getsaveSettingsBText()); 
+break;
+case "defaultSettingBText":
+gui.setDefaultSettingBText(textImp.getdefaultSettingBText()); 
+break;
+case "errorLText":
+gui.setErrorLText(textImp.geterrorLText()); 
+break;
+case "emailErrLText":
+gui.setEmailErrLText(textImp.getemailErrLText()); 
+break;
+case "defaultEmailErrFText":
+gui.setDefaultEmailErrFText(textImp.getdefaultEmailErrFText()); 
+break;
+case "emailErrFTooltipText":
+gui.setEmailErrFTooltipText(textImp.getemailErrFTooltipText()); 
+break;
+case "emailErrDesLText":
+gui.setEmailErrDesLText(textImp.getemailErrDesLText()); 
+break;
+case "emailErrBText":
+gui.setEmailErrBText(textImp.getemailErrBText()); 
+break;
+case "emailErrCText":
+gui.setEmailErrCText(textImp.getemailErrCText()); 
+break;
+case "comfirmRemovalBText":
+gui.setComfirmRemovalBText(textImp.getcomfirmRemovalBText()); 
+break;
+case "noButtonText":
+gui.setNoButtonText(textImp.getnoButtonText()); 
+break;
+case "dbNotFoundText":
+gui.setDbNotFoundText(textImp.getdbNotFoundText()); 
+break;
+case "dbNotFoundLText":
+gui.setDbNotFoundLText(textImp.getdbNotFoundLText()); 
+break;
+case "comfirmCreateBText":
+gui.setComfirmCreateBText(textImp.getcomfirmCreateBText()); 
+break;
+case "comfirmCreateBTooltipText":
+gui.setComfirmCreateBTooltipText(textImp.getcomfirmCreateBTooltipText()); 
+break;
+case "dbErrorBCreateBackupText":
+gui.setDbErrorBCreateBackupText(textImp.getdbErrorBCreateBackupText()); 
+break;
+case "dbErrorBCreateBackupTooltipText":
+gui.setDbErrorBCreateBackupTooltipText(textImp.getdbErrorBCreateBackupTooltipText()); 
+break;
+case "labelDefaultText":
+gui.setLabelDefaultText(textImp.getlabelDefaultText()); 
+break;
+case "defaultLocTFText":
+gui.setDefaultLocTFText(textImp.getdefaultLocTFText()); 
+break;
+case "filePlaceLText":
+gui.setFilePlaceLText(textImp.getfilePlaceLText()); 
+break;
+case "fileLocTFDefaultValue":
+gui.setFileLocTFDefaultValue(textImp.getfileLocTFDefaultValue()); 
+break;
+case "fileLocTFTooltipText":
+gui.setFileLocTFTooltipText(textImp.getfileLocTFTooltipText()); 
+break;
+case "defaultLocBText":
+gui.setDefaultLocBText(textImp.getdefaultLocBText()); 
+break;
+case "getFileBText":
+gui.setGetFileBText(textImp.getgetFileBText()); 
+break;
+case "printLText":
+gui.setPrintLText(textImp.getprintLText()); 
+break;
+case "writeLocXTooltipText":
+gui.setWriteLocXTooltipText(textImp.getwriteLocXTooltipText()); 
+break;
+case "writeLocYTooltipText":
+gui.setWriteLocYTooltipText(textImp.getwriteLocYTooltipText()); 
+break;
+case "pdfPreviewBText":
+gui.setPdfPreviewBText(textImp.getpdfPreviewBText()); 
+break;
+case "cancelSettingBText":
+gui.setCancelSettingBText(textImp.getcancelSettingBText()); 
+break;
+case "mFileText":
+gui.setMFileText(textImp.getmFileText()); 
+break;
+case "mSettingsText":
+gui.setMSettingsText(textImp.getmSettingsText()); 
+break;
+case "mCodeSettingsText":
+gui.setMCodeSettingsText(textImp.getmCodeSettingsText()); 
+break;
+case "mCodeSettingsToolTipText":
+gui.setMCodeSettingsToolTipText(textImp.getmCodeSettingsToolTipText()); 
+break;
+case "mExitTooltipText":
+gui.setMExitTooltipText(textImp.getmExitTooltipText()); 
+break;
+case "mPrintSettingsText":
+gui.setMPrintSettingsText(textImp.getmPrintSettingsText()); 
+break;
+case "mPrintSettingsToolTipText":
+gui.setMPrintSettingsToolTipText(textImp.getmPrintSettingsToolTipText()); 
+break;
+case "mPrintPreviewText":
+gui.setMPrintPreviewText(textImp.getmPrintPreviewText()); 
+break;
+case "mPrintPreviewTooltipText":
+gui.setMPrintPreviewTooltipText(textImp.getmPrintPreviewTooltipText()); 
+break;
+case "mRestoDBText":
+gui.setMRestoDBText(textImp.getmRestoDBText()); 
+break;
+case "mRestoDBTooltipText":
+gui.setMRestoDBTooltipText(textImp.getmRestoDBTooltipText()); 
+break;
+case "dbNameText":
+gui.setDbNameText(textImp.getdbNameText()); 
+break;
+case "codeLabelText":
+gui.setCodeLabelText(textImp.getcodeLabelText()); 
+break;
+case "controlItemLabelText":
+gui.setControlItemLabelText(textImp.getcontrolItemLabelText()); 
+break;
+case "addSystemBText":
+gui.setAddSystemBText(textImp.getaddSystemBText()); 
+break;
+case "newCodeBText":
+gui.setNewCodeBText(textImp.getnewCodeBText()); 
+break;
+case "saveCodeBText":
+gui.setSaveCodeBText(textImp.getsaveCodeBText()); 
+break;
+case "searchControlBText":
+gui.setSearchControlBText(textImp.getsearchControlBText()); 
+break;
+case "removeControlBText":
+gui.setRemoveControlBText(textImp.getremoveControlBText()); 
+break;
+case "replaceCodeBText":
+gui.setReplaceCodeBText(textImp.getreplaceCodeBText()); 
+break;
+case "searchControlTFTooltipText":
+gui.setSearchControlTFTooltipText(textImp.getsearchControlTFTooltipText()); 
+break;
+case "removeControlTFTooltipText":
+gui.setRemoveControlTFTooltipText(textImp.getremoveControlTFTooltipText()); 
+break;
+case "replaceCodeTFTooltipText":
+gui.setReplaceCodeTFTooltipText(textImp.getreplaceCodeTFTooltipText()); 
+break;
+case "defaultCodeValue":
+gui.setDefaultCodeValue(textImp.getdefaultCodeValue()); 
+break;
+case "codeTFTooltipText":
+gui.setCodeTFTooltipText(textImp.getcodeTFTooltipText()); 
+break;
+case "controlDefaultValue":
+gui.setControlDefaultValue(textImp.getcontrolDefaultValue()); 
+break;
+case "controlTFTooltipText":
+gui.setControlTFTooltipText(textImp.getcontrolTFTooltipText()); 
+break;
+case "frameAddControlText":
+gui.setFrameAddControlText(textImp.getframeAddControlText()); 
+break;
+case "cancelBText":
+gui.setCancelBText(textImp.getcancelBText()); 
+break;
+case "frameCodeSettingsText":
+gui.setFrameCodeSettingsText(textImp.getframeCodeSettingsText()); 
+break;
+case "codeLengthLabelText":
+gui.setCodeLengthLabelText(textImp.getcodeLengthLabelText()); 
+break;
+case "codeLengthFText":
+gui.setCodeLengthFText(textImp.getcodeLengthFText()); 
+break;
+case "codeLengthFTextTooltipText":
+gui.setCodeLengthFTextTooltipText(textImp.getcodeLengthFTextTooltipText()); 
+break;
+case "codeStrengthLText":
+gui.setCodeStrengthLText(textImp.getcodeStrengthLText()); 
+break;
+case "codeTypeArrayText":
+gui.setCodeTypeArrayText(textImp.getcodeTypeArrayText()); 
+break;
+case "codeTypeTooltipText":
+gui.setCodeTypeTooltipText(textImp.getcodeTypeTooltipText()); 
+break;
+case "saveSettingsBText":
+gui.setSaveSettingsBText(textImp.getsaveSettingsBText()); 
+break;
+case "defaultSettingBText":
+gui.setDefaultSettingBText(textImp.getdefaultSettingBText()); 
+break;
+case "errorLText":
+gui.setErrorLText(textImp.geterrorLText()); 
+break;
+case "emailErrLText":
+gui.setEmailErrLText(textImp.getemailErrLText()); 
+break;
+case "defaultEmailErrFText":
+gui.setDefaultEmailErrFText(textImp.getdefaultEmailErrFText()); 
+break;
+case "emailErrFTooltipText":
+gui.setEmailErrFTooltipText(textImp.getemailErrFTooltipText()); 
+break;
+case "emailErrDesLText":
+gui.setEmailErrDesLText(textImp.getemailErrDesLText()); 
+break;
+case "emailErrBText":
+gui.setEmailErrBText(textImp.getemailErrBText()); 
+break;
+case "emailErrCText":
+gui.setEmailErrCText(textImp.getemailErrCText()); 
+break;
+case "comfirmRemovalBText":
+gui.setComfirmRemovalBText(textImp.getcomfirmRemovalBText()); 
+break;
+case "noButtonText":
+gui.setNoButtonText(textImp.getnoButtonText()); 
+break;
+case "dbNotFoundText":
+gui.setDbNotFoundText(textImp.getdbNotFoundText()); 
+break;
+case "dbNotFoundLText":
+gui.setDbNotFoundLText(textImp.getdbNotFoundLText()); 
+break;
+case "comfirmCreateBText":
+gui.setComfirmCreateBText(textImp.getcomfirmCreateBText()); 
+break;
+case "comfirmCreateBTooltipText":
+gui.setComfirmCreateBTooltipText(textImp.getcomfirmCreateBTooltipText()); 
+break;
+case "dbErrorBCreateBackupText":
+gui.setDbErrorBCreateBackupText(textImp.getdbErrorBCreateBackupText()); 
+break;
+case "dbErrorBCreateBackupTooltipText":
+gui.setDbErrorBCreateBackupTooltipText(textImp.getdbErrorBCreateBackupTooltipText()); 
+break;
+case "labelDefaultText":
+gui.setLabelDefaultText(textImp.getlabelDefaultText()); 
+break;
+case "defaultLocTFText":
+gui.setDefaultLocTFText(textImp.getdefaultLocTFText()); 
+break;
+case "filePlaceLText":
+gui.setFilePlaceLText(textImp.getfilePlaceLText()); 
+break;
+case "fileLocTFDefaultValue":
+gui.setFileLocTFDefaultValue(textImp.getfileLocTFDefaultValue()); 
+break;
+case "fileLocTFTooltipText":
+gui.setFileLocTFTooltipText(textImp.getfileLocTFTooltipText()); 
+break;
+case "defaultLocBText":
+gui.setDefaultLocBText(textImp.getdefaultLocBText()); 
+break;
+case "getFileBText":
+gui.setGetFileBText(textImp.getgetFileBText()); 
+break;
+case "printLText":
+gui.setPrintLText(textImp.getprintLText()); 
+break;
+case "writeLocXTooltipText":
+gui.setWriteLocXTooltipText(textImp.getwriteLocXTooltipText()); 
+break;
+case "writeLocYTooltipText":
+gui.setWriteLocYTooltipText(textImp.getwriteLocYTooltipText()); 
+break;
+case "pdfPreviewBText":
+gui.setPdfPreviewBText(textImp.getpdfPreviewBText()); 
+break;
+case "cancelSettingBText":
+gui.setCancelSettingBText(textImp.getcancelSettingBText()); 
+break;
+case "mFileText":
+gui.setMFileText(textImp.getmFileText()); 
+break;
+case "mSettingsText":
+gui.setMSettingsText(textImp.getmSettingsText()); 
+break;
+case "mCodeSettingsText":
+gui.setMCodeSettingsText(textImp.getmCodeSettingsText()); 
+break;

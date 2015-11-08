@@ -1,0 +1,65 @@
+mFileText; File
+mSettingsText; Settings
+mCodeSettingsText; Code Settings
+mCodeSettingsToolTipText; Opens the settings options for code generation.
+mExitTooltipText; Close Program
+mPrintSettingsText; Print Settings
+mPrintSettingsToolTipText; Opens up print settings
+mPrintPreviewText; Print Preview
+mPrintPreviewTooltipText; Shows the layout of the print
+mRestoDBText; Restore Database
+mRestoDBTooltipText; Restore the database from backup
+dbNameText; !dbname!
+codeLabelText; Code
+controlItemLabelText; !control!
+addSystemBText; Add!control!
+newCodeBText; New Code
+saveCodeBText; Save Code
+searchControlBText; Search !control!
+removeControlBText; Remove !control!
+replaceCodeBText; Replace code
+searchControlTFTooltipText; Searches the database for the given !control!
+removeControlTFTooltipText; Removes the !control! from the database
+replaceCodeTFTooltipText; Replaces the code of a given !control! in the database
+defaultCodeValue; 00000
+codeTFTooltipText; <html>The code to be saved to the !control!<br> This code can't be changed in a hand<br> after a new one has been generated.</html>
+controlDefaultValue; 
+controlTFTooltipText; The name, number or value given to the !control!
+frameAddControlText; Add new !control!
+cancelBText; Cancel
+frameCodeSettingsText; Code Settings
+codeLengthLabelText; Length of the code
+codeLengthFText; 5
+codeLengthFTextTooltipText; <html>Defines the length of a new code. <br>The longer the code, the stronger it is.<br> The length should be between 4-30 symbols
+codeStrengthLText; Type of the code
+codeTypeArrayText; Numbers,Numbers and letters,Numbers and small and big letters
+codeTypeTooltipText; <html>Decides the strength of the code.<br> The strongst code will be a combination of length and<br> the mixture of numbers and small and big letters</html>
+saveSettingsBText; Save Settings
+defaultSettingBText; Default Settings
+errorLText; An exception, !errorEX! , has occured
+emailErrLText; Your email
+defaultEmailErrFText; 
+emailErrFTooltipText; Leave this field empty, if you don't want a reply with possible help
+emailErrDesLText; What happened?
+emailErrBText; Send Error Message
+emailErrCText; Dont Send
+comfirmRemovalBText; Comfirm
+noButtonText; No
+dbNotFoundText; Database not found
+dbNotFoundLText; Unable to find the database, or database might not exist
+comfirmCreateBText; Comfirm
+comfirmCreateBTooltipText; Comfirms creation of new database
+dbErrorBCreateBackupText; Create from backup
+dbErrorBCreateBackupTooltipText; Creates database from backup
+labelDefaultText; Folder Placement
+defaultLocTFText; 
+filePlaceLText; File Placement
+fileLocTFDefaultValue; 
+fileLocTFTooltipText; If you don't want to write to file, leave this field empty
+defaultLocBText; Find Folder  
+getFileBText; Find File
+printLText; Print Placement
+writeLocXTooltipText; Coordinates 0,0 is located in the button left side of the document
+writeLocYTooltipText; Coordinates 0,0 is located in the button left side of the document
+pdfPreviewBText; Preview print out
+cancelSettingBText; Cancel
