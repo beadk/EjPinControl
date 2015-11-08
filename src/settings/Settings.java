@@ -11,18 +11,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import controller.ErrorHandler;
-import gui.*;
 
 public class Settings {
 
 	ErrorHandler err = new ErrorHandler();
-	GUI gui = new GUI();
 	private String fileLoc;
 	private String writeLocX, writeLocY;
 	private String defaultLoc;
 	private int codeLength;
 	private String codeType;
 	private String path = "/PinGen/Dorma RS8";
+	private String language = "English";
+	private String dbname;
+	private String control;
 
 	public void readSettings(String line) {
 		String[] lineSplit = line.split(";");
@@ -43,6 +44,15 @@ public class Settings {
 			break;
 		case "codeType":
 			codeType = lineSplit[1];
+			break;
+		case "language":
+			language = lineSplit[1];
+			break;
+		case "control":
+			control = lineSplit[1];
+			break;
+		case "dbname":
+			dbname = lineSplit[1];
 			break;
 		}
 	}
@@ -73,6 +83,7 @@ public class Settings {
 			out.write("writeLoc" + ";" + writeLocX + "," + writeLocY + "\n");
 			out.write("codeLength" + ";" + codeLength + "\n");
 			out.write("codeType" + ";" + codeType + "\n");
+			out.write("language" + "," + language + "\n");
 			out.close();
 		} catch (FileNotFoundException e) {
 			File dir = new File(ownLoc + "/PinGen");
@@ -144,6 +155,38 @@ public class Settings {
 
 	public void setCodeType(String codeType) {
 		this.codeType = codeType;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public String getDbname() {
+		return dbname;
+	}
+
+	public void setDbname(String dbname) {
+		this.dbname = dbname;
+	}
+
+	public String getControl() {
+		return control;
+	}
+
+	public void setControl(String control) {
+		this.control = control;
 	}
 
 }

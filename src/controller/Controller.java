@@ -19,6 +19,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import settings.Settings;
+import settings.TextImport;
 import sun.misc.*;
 
 import org.apache.pdfbox.exceptions.COSVisitorException;
@@ -31,6 +32,7 @@ public class Controller {
 	Kode_gen genKode = new Kode_gen();
 	JFileChooser fc = new JFileChooser();
 	Settings settings = new Settings();
+	TextImport textImp = new TextImport();
 	List<SingleCodeDTO> systems = new ArrayList<>();
 	List<BrugtePinsDTO> bPins = new ArrayList<>();
 	GUI gui = new GUI();
@@ -38,7 +40,7 @@ public class Controller {
 	JFileChooser chooser;
 	ErrorHandler err = new ErrorHandler();
 	private String fileLoc, defaultLoc, ownLoc, errorTitle, errorMessage,
-			comfirmTitle, comfirmMessage, codeType;
+			comfirmTitle, comfirmMessage, codeType, language, control, dbname;
 	private int codeLength;
 	private float fWriteLocX, fWriteLocY;
 
@@ -47,9 +49,15 @@ public class Controller {
 			ownLoc = getOwnLoc();
 			readSettings();
 			loadSettings();
+			if (language.equals("English")) {
+				textImp.readDefault();
+			}
 			if (defaultLoc != null) {
-				start();
+				setGUIText(textImp.getFields());
 				gui.mainGUI(name);
+				start();
+				gui.show();
+				err.errorGUIConnect(gui);
 				ready();
 				try {
 					gui.getbSFrame().toFront();
@@ -59,6 +67,212 @@ public class Controller {
 			}
 		} catch (Exception e) {
 			err.printError(ownLoc, e);
+		}
+	}
+
+	public void setGUIText(List<FieldsDTO> text) {
+		for (int i = 0; i < text.size(); i++) {
+			switch (text.get(i).getFields()) {
+			case "mFileText":
+				gui.setmFileText(textImp.getmFileText());
+				break;
+			case "mSettingsText":
+				gui.setmSettingsText(textImp.getmSettingsText());
+				break;
+			case "mCodeSettingsText":
+				gui.setmCodeSettingsText(textImp.getmCodeSettingsText());
+				break;
+			case "mCodeSettingsToolTipText":
+				gui.setmCodeSettingsToolTipText(textImp
+						.getmCodeSettingsToolTipText());
+				break;
+			case "mExitTooltipText":
+				gui.setmExitTooltipText(textImp.getmExitTooltipText());
+				break;
+			case "mPrintSettingsText":
+				gui.setmPrintSettingsText(textImp.getmPrintSettingsText());
+				break;
+			case "mPrintSettingsToolTipText":
+				gui.setmPrintSettingsToolTipText(textImp
+						.getmPrintSettingsToolTipText());
+				break;
+			case "mPrintPreviewText":
+				gui.setmPrintPreviewText(textImp.getmPrintPreviewText());
+				break;
+			case "mPrintPreviewTooltipText":
+				gui.setmPrintPreviewTooltipText(textImp
+						.getmPrintPreviewTooltipText());
+				break;
+			case "mRestoDBText":
+				gui.setmRestoDBText(textImp.getmRestoDBText());
+				break;
+			case "mRestoDBTooltipText":
+				gui.setmRestoDBTooltipText(textImp.getmRestoDBTooltipText());
+				break;
+			case "dbNameText":
+				gui.setDbNameText(textImp.getDbNameText());
+				break;
+			case "codeLabelText":
+				gui.setCodeLabelText(textImp.getCodeLabelText());
+				break;
+			case "controlItemLabelText":
+				gui.setControlItemLabelText(textImp.getCodeLabelText());
+				break;
+			case "addSystemBText":
+				gui.setAddSystemBText(textImp.getAddSystemBText());
+				break;
+			case "newCodeBText":
+				gui.setNewCodeBText(textImp.getNewCodeBText());
+				break;
+			case "saveCodeBText":
+				gui.setSaveCodeBText(textImp.getSaveCodeBText());
+				break;
+			case "searchControlBText":
+				gui.setSearchControlBText(textImp.getSearchControlBText());
+				break;
+			case "removeControlBText":
+				gui.setRemoveControlBText(textImp.getRemoveControlBText());
+				break;
+			case "replaceCodeBText":
+				gui.setReplaceCodeBText(textImp.getReplaceCodeBText());
+				break;
+			case "searchControlTFTooltipText":
+				gui.setSearchControlTFTooltipText(textImp
+						.getSearchControlTFTooltipText());
+				break;
+			case "removeControlTFTooltipText":
+				gui.setRemoveControlTFTooltipText(textImp
+						.getRemoveControlTFTooltipText());
+				break;
+			case "replaceCodeTFTooltipText":
+				gui.setReplaceCodeTFTooltipText(textImp
+						.getReplaceCodeTFTooltipText());
+				break;
+			case "defaultCodeValue":
+				gui.setDefaultCodeValue(textImp.getDefaultCodeValue());
+				break;
+			case "codeTFTooltipText":
+				gui.setCodeTFTooltipText(textImp.getCodeTFTooltipText());
+				break;
+			case "controlDefaultValue":
+				gui.setControlDefaultValue(textImp.getControlDefaultValue());
+				break;
+			case "controlTFTooltipText":
+				gui.setControlTFTooltipText(textImp.getControlTFTooltipText());
+				break;
+			case "frameAddControlText":
+				gui.setFrameAddControlText(textImp.getFrameAddControlText());
+				break;
+			case "cancelBText":
+				gui.setCancelBText(textImp.getCancelBText());
+				break;
+			case "frameCodeSettingsText":
+				gui.setFrameCodeSettingsText(textImp.getFrameCodeSettingsText());
+				break;
+			case "codeLengthLabelText":
+				gui.setCodeLengthLabelText(textImp.getCodeLengthLabelText());
+				break;
+			case "codeLengthFText":
+				gui.setCodeLengthFText(textImp.getCodeLengthFText());
+				break;
+			case "codeLengthFTextTooltipText":
+				gui.setCodeLengthFTextTooltipText(textImp
+						.getCodeLengthFTextTooltipText());
+				break;
+			case "codeStrengthLText":
+				gui.setCodeStrengthLText(textImp.getCodeStrengthLText());
+				break;
+			case "codeTypeArrayText":
+				gui.setCodeTypeArrayText(textImp.getCodeTypeArrayText().split(
+						","));
+				break;
+			case "codeTypeTooltipText":
+				gui.setCodeTypeTooltipText(textImp.getCodeTypeTooltipText());
+				break;
+			case "saveSettingsBText":
+				gui.setSaveSettingsBText(textImp.getSaveSettingsBText());
+				break;
+			case "defaultSettingBText":
+				gui.setDefaultSettingBText(textImp.getDefaultSettingBText());
+				break;
+			case "errorLText":
+				gui.setErrorLText(textImp.getErrorLText());
+				break;
+			case "emailErrLText":
+				gui.setEmailErrLText(textImp.getEmailErrLText());
+				break;
+			case "defaultEmailErrFText":
+				gui.setDefaultEmailErrFText(textImp.getDefaultEmailErrFText());
+				break;
+			case "emailErrFTooltipText":
+				gui.setEmailErrFTooltipText(textImp.getEmailErrFTooltipText());
+				break;
+			case "emailErrDesLText":
+				gui.setEmailErrDesLText(textImp.getEmailErrDesLText());
+				break;
+			case "emailErrBText":
+				gui.setEmailErrBText(textImp.getEmailErrBText());
+				break;
+			case "emailErrCText":
+				gui.setEmailErrCText(textImp.getEmailErrCText());
+				break;
+			case "comfirmRemovalBText":
+				gui.setComfirmRemovalBText(textImp.getComfirmRemovalBText());
+				break;
+			case "noButtonText":
+				gui.setNoButtonText(textImp.getNoButtonText());
+				break;
+			case "dbNotFoundText":
+				gui.setDbNotFoundText(textImp.getDbNotFoundText());
+				break;
+			case "dbNotFoundLText":
+				gui.setDbNotFoundLText(textImp.getDbNotFoundLText());
+				break;
+			case "comfirmCreateBText":
+				gui.setComfirmCreateBText(textImp.getComfirmCreateBText());
+				break;
+			case "dbErrorBCreateBackupText":
+				gui.setDbErrorBCreateBackupText(textImp
+						.getDbErrorBCreateBackupText());
+				break;
+			case "labelDefaultText":
+				gui.setLabelDefaultText(textImp.getLabelDefaultText());
+				break;
+			case "defaultLocTFText":
+				gui.setDefaultLocTFText(textImp.getDefaultLocTFText());
+				break;
+			case "filePlaceLText":
+				gui.setFilePlaceLText(textImp.getFilePlaceLText());
+				break;
+			case "fileLocTFDefaultValue":
+				gui.setFileLocTFDefaultValue(textImp.getFileLocTFDefaultValue());
+				break;
+			case "fileLocTFTooltipText":
+				gui.setFileLocTFTooltipText(textImp.getFileLocTFTooltipText());
+				break;
+			case "defaultLocBText":
+				gui.setDefaultLocBText(textImp.getDefaultLocBText());
+				break;
+			case "getFileBText":
+				gui.setGetFileBText(textImp.getGetFileBText());
+				break;
+			case "printLText":
+				gui.setPrintLText(textImp.getPrintLText());
+				break;
+			case "writeLocXTooltipText":
+				gui.setWriteLocXTooltipText(textImp.getWriteLocXTooltipText());
+				break;
+			case "writeLocYTooltipText":
+				gui.setWriteLocYTooltipText(textImp.getWriteLocYTooltipText());
+				break;
+			case "pdfPreviewBText":
+				gui.setPdfPreviewBText(textImp.getPdfPreviewBText());
+				break;
+			case "cancelSettingBText":
+				gui.setCancelSettingBText(textImp.getCancelSettingBText());
+				break;
+
+			}
 		}
 	}
 
@@ -81,21 +295,20 @@ public class Controller {
 				break;
 			}
 
-			gui.getSaveSettingsB().addActionListener(
-					new SaveCodeSettings());
-			gui.getCancelSettingB()
-					.addActionListener(new CancelSettings());
+			gui.getSaveSettingsB().addActionListener(new SaveCodeSettings());
+			gui.getCancelSettingB().addActionListener(new CancelSettings());
 			gui.getDefaultSettingB().addActionListener(
 					new DefaultCodeSettings());
-			gui.getFrameCodeSettings().addComponentListener(new ComponentAdapter() {
-				public void componentResized(ComponentEvent event) {
-					try {
-						gui.resizeFrameCodeSettings();
-					} catch (Exception e) {
-						err.printError(ownLoc, e);
-					}
-				}
-			});
+			gui.getFrameCodeSettings().addComponentListener(
+					new ComponentAdapter() {
+						public void componentResized(ComponentEvent event) {
+							try {
+								gui.resizeFrameCodeSettings();
+							} catch (Exception e) {
+								err.printError(ownLoc, e);
+							}
+						}
+					});
 		}
 	}
 
@@ -146,15 +359,16 @@ public class Controller {
 					gui.getCodeTF().setEditable(true);
 				}
 			});
-			gui.getFrameAddControl().addComponentListener(new ComponentAdapter() {
-				public void componentResized(ComponentEvent event) {
-					try {
-						gui.resizeFrameAddControl();
-					} catch (Exception e) {
-						err.printError(ownLoc, e);
-					}
-				}
-			});
+			gui.getFrameAddControl().addComponentListener(
+					new ComponentAdapter() {
+						public void componentResized(ComponentEvent event) {
+							try {
+								gui.resizeFrameAddControl();
+							} catch (Exception e) {
+								err.printError(ownLoc, e);
+							}
+						}
+					});
 		}
 	}
 
@@ -312,13 +526,15 @@ public class Controller {
 						&& !gui.getSearchControlTF().getText().equals("")) {
 					String fSPin = "";
 					try {
-						fSPin = findSystemPin(gui.getSearchControlTF().getText());
+						fSPin = findSystemPin(gui.getSearchControlTF()
+								.getText());
 					} catch (Exception e1) {
 						err.printError(ownLoc, e1);
 					}
 					String title = "Find system";
-					String message = "System " + gui.getSearchControlTF().getText()
-							+ " har pin: " + decrypt(fSPin);
+					String message = "System "
+							+ gui.getSearchControlTF().getText() + " har pin: "
+							+ decrypt(fSPin);
 					gui.addedWindow(title, message);
 					gui.getSearchControlTF().setText("");
 				} else if (gui.getSearchControlTF().getText().equals("")) {
@@ -327,7 +543,8 @@ public class Controller {
 					gui.errorWindow(errorTitle, errorMessage);
 				} else {
 					errorTitle = "Fejl: System ikke fundet";
-					errorMessage = "System " + gui.getSearchControlTF().getText()
+					errorMessage = "System "
+							+ gui.getSearchControlTF().getText()
 							+ " findes ikke i datafilen";
 					gui.errorWindow(errorTitle, errorMessage);
 				}
@@ -381,8 +598,7 @@ public class Controller {
 				try {
 					if (!checkSystem(gui.getControlTF().getText())) {
 						errorTitle = "Fejl: Brurgt system nummer";
-						errorMessage = "System "
-								+ gui.getControlTF().getText()
+						errorMessage = "System " + gui.getControlTF().getText()
 								+ " er brugt og har allerede en pinkode";
 					} else {
 						try {
@@ -625,6 +841,9 @@ public class Controller {
 			defaultLoc = settings.getDefaultLoc();
 			codeLength = settings.getCodeLength();
 			codeType = settings.getCodeType();
+			language = settings.getLanguage();
+			control = settings.getControl();
+			dbname = settings.getDbname();
 		} catch (NullPointerException e) {
 			errorTitle = "Ingen Indstillinger fundet";
 			errorMessage = "<html>Der er ikke blevet fundet nogen indstilling.<br> "
@@ -693,18 +912,17 @@ public class Controller {
 
 		} catch (FileNotFoundException ex) {
 			gui.dbError();
-			gui.getComfirmRemovalB().addActionListener(
-					new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							try {
-								newDB();
-								gui.getComfirmRemovalFrame().dispose();
-							} catch (Exception e1) {
-								err.printError(ownLoc, e1);
-							}
-						}
-					});
-			gui.getNoButton().addActionListener(new ActionListener() {
+			gui.getComfirmCreateB().addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						newDB();
+						gui.getComfirmRemovalFrame().dispose();
+					} catch (Exception e1) {
+						err.printError(ownLoc, e1);
+					}
+				}
+			});
+			gui.getDbErrorBCreateBackup().addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
 						genSkabDB();
@@ -879,8 +1097,7 @@ public class Controller {
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showOpenDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			gui.getDefaultLocTF().setText(
-					chooser.getSelectedFile().toString());
+			gui.getDefaultLocTF().setText(chooser.getSelectedFile().toString());
 		}
 	}
 
@@ -1040,6 +1257,7 @@ public class Controller {
 		defaultLoc = settings.getDefaultLoc();
 		codeLength = settings.getCodeLength();
 		codeType = settings.getCodeType();
+		language = settings.getLanguage();
 		settings.writeSettings(ownLoc);
 	}
 

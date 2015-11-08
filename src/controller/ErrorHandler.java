@@ -3,6 +3,8 @@ package controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowAdapter;
@@ -40,14 +42,19 @@ import gui.*;
 public class ErrorHandler {
 	String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmm").format(Calendar
 			.getInstance().getTime());
-	GUI gui = new GUI();
+	GUI gui;
 	private String[] eStr;
 	private String fileName;
 	Exception e;
 
+	public void errorGUIConnect(GUI gui){
+		this.gui=gui;
+	}
+	
 	public void printError(String ownLoc, Exception e) {
 		try {
 			this.e = e;
+			e.printStackTrace();
 			eStr = e.toString().split(":");
 			fileName = ownLoc + "/PinGenErrors/Error_" + eStr[0] + "_"
 					+ timeStamp + ".txt";
@@ -55,6 +62,15 @@ public class ErrorHandler {
 					new FileWriter(fileName)));
 			e.printStackTrace(out);
 			gui.errorExWindow(e.toString(), ownLoc + "/PinGenErrors");
+			gui.getbSFrame().addComponentListener(new ComponentAdapter() {
+				public void componentResized(ComponentEvent event) {
+					try {
+						gui.resizeErrorFrame();
+					} catch (Exception e) {
+						printError(ownLoc, e);
+					}
+				}
+			});
 			gui.getEmailErrB().addActionListener(new SendErrMess());
 			gui.getEmailErrC().addActionListener(new Cancel());
 			gui.getbSFrame().addWindowListener(new WindowAdapter() {

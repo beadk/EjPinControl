@@ -1,6 +1,6 @@
 package controller;
 
-public class Main {
+public class EjPinControl {
 
 	public static void main(String[] args) {
 

@@ -29,7 +29,7 @@ import javax.swing.border.SoftBevelBorder;
 public class GUI {
 	private JFrame comfirmRemovalFrame;
 	private JFrame frame, frameCodeSettings, frameAddControl, bSFrame;
-	private JPanel panel, panelSettings, panelAddControl;
+	private JPanel panel, panelSettings, panelAddControl, bSPanel;
 	private JComboBox<Object> codeType;
 	private JButton newCodeB, saveCodeB, searchControlB, removeControlB,
 			replaceCodeB, comfirmRemovalB, noButton, pdfPreviewB,
@@ -235,16 +235,25 @@ public class GUI {
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
 		frame.pack();
 	}
 
+	public void show(){
+		frame.revalidate();
+		frame.setVisible(true);
+	}
+	
 	public void resizeFrame() {
 		panel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 		menu.setBounds(0, 0, panel.getWidth(), 20);
 		panel.revalidate();
 	}
 
+	public void resizeErrorFrame() {
+		bSPanel.setBounds(0, 0, bSFrame.getWidth(), bSFrame.getHeight());
+		bSPanel.revalidate();
+	}
+	
 	public void resizeFrameCodeSettings() {
 		panelSettings.setBounds(0, 0, frameCodeSettings.getWidth(), frameCodeSettings.getHeight());
 		panelSettings.revalidate();
@@ -396,14 +405,14 @@ public class GUI {
 	public void errorExWindow(String errorEX, String errorLoc) {
 		bSFrame = new JFrame("Error: An exception has occured.");
 		bSFrame.setMinimumSize(new Dimension(500, 360));
-		JPanel bSPanel = new JPanel();
+		bSPanel = new JPanel();
 		bSPanel.setBackground(new Color(245, 245, 245));
 		bSPanel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null,
 				null, null));
 		bSPanel.setBounds(10, 10, bSFrame.getWidth() - 40,
 				bSFrame.getHeight() - 60);
 		bSFrame.add(bSPanel);
-		errorL = new JLabel(errorLText);
+		errorL = new JLabel(errorLText.replace("!errorEX!", errorEX));
 		errorL.setHorizontalAlignment(SwingConstants.CENTER);
 		errorL.setBounds(10, 10, 400, 40);
 
@@ -426,10 +435,10 @@ public class GUI {
 		emailErrDesF.setBorder(bord);
 		
 		emailErrB = new JButton(emailErrBText);
-		emailErrB.setBounds(10, 270, 150, 20);
+		emailErrB.setBounds(10, 270, 175, 20);
 
 		emailErrC = new JButton(emailErrCText);
-		emailErrC.setBounds(170, 270, 100, 20);
+		emailErrC.setBounds(195, 270, 100, 20);
 
 		bSPanel.add(errorL);
 		bSPanel.add(emailErrL);
