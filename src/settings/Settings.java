@@ -16,7 +16,7 @@ public class Settings {
 
 	ErrorHandler err = new ErrorHandler();
 	private String fileLoc;
-	private String writeLocX, writeLocY;
+	private String codeLocX, codeLocY, systemLocX, systemLocY;
 	private String defaultLoc;
 	private int codeLength;
 	private String codeType;
@@ -31,10 +31,15 @@ public class Settings {
 		case "fileLoc":
 			fileLoc = lineSplit[1];
 			break;
-		case "writeLoc":
+		case "codeLoc":
 			String[] lineSplit2 = lineSplit[1].split(",");
-			writeLocX = lineSplit2[0];
-			writeLocY = lineSplit2[1];
+			codeLocX = lineSplit2[0];
+			codeLocY = lineSplit2[1];
+			break;
+		case "systemLoc":
+			String[] lineSplit3 = lineSplit[1].split(",");
+			systemLocX = lineSplit3[0];
+			systemLocY = lineSplit3[1];
 			break;
 		case "defaultLoc":
 			defaultLoc = lineSplit[1];
@@ -57,16 +62,22 @@ public class Settings {
 		}
 	}
 
-	public void updateSettings(String newDefaultLoc, String newFileLoc,
-			String newWriteLoc, String ownLoc) {
+	public void updateGSettings(String newDefaultLoc, String newFileLoc, String ownLoc, String language) {
 		defaultLoc = newDefaultLoc;
 		fileLoc = newFileLoc;
-		String[] lineSplit2 = newWriteLoc.split(",");
-		writeLocX = lineSplit2[0];
-		writeLocY = lineSplit2[1];
 		writeSettings(ownLoc);
+		this.language = language;
 	}
 
+	public void updatePrintSettings(String newCodeLoc, String newSystemLoc){
+		String[] lineSplit2 = newCodeLoc.split(",");
+		codeLocX = lineSplit2[0];
+		codeLocY = lineSplit2[1];
+		String[] lineSplit3 = newSystemLoc.split(",");
+		systemLocX = lineSplit3[0];
+		systemLocY = lineSplit3[1];
+	}
+	
 	public void updateCodeSettings(int codeLength, String codeType,
 			String ownLoc) {
 		this.codeLength = codeLength;
@@ -80,7 +91,8 @@ public class Settings {
 					new FileWriter(ownLoc + path + "/DormaRS8Settings.txt")));
 			out.write("defaultLoc" + ";" + defaultLoc + "\n");
 			out.write("fileLoc" + ";" + fileLoc + "\n");
-			out.write("writeLoc" + ";" + writeLocX + "," + writeLocY + "\n");
+			out.write("codeLoc" + ";" + codeLocX + "," + codeLocY + "\n");
+			out.write("systemLoc" + ";" + systemLocX + "," + systemLocY + "\n");
 			out.write("codeLength" + ";" + codeLength + "\n");
 			out.write("codeType" + ";" + codeType + "\n");
 			out.write("language" + "," + language + "\n");
@@ -117,28 +129,12 @@ public class Settings {
 		this.fileLoc = fileLoc;
 	}
 
-	public String getWriteLocX() {
-		return writeLocX;
-	}
-
-	public void setWriteLocX(String writeLocX) {
-		this.writeLocX = writeLocX;
-	}
-
 	public String getDefaultLoc() {
 		return defaultLoc;
 	}
 
 	public void setDefaultLoc(String defaultLoc) {
 		this.defaultLoc = defaultLoc;
-	}
-
-	public String getWriteLocY() {
-		return writeLocY;
-	}
-
-	public void setWriteLocY(String writeLocY) {
-		this.writeLocY = writeLocY;
 	}
 
 	public int getCodeLength() {
@@ -187,6 +183,38 @@ public class Settings {
 
 	public void setControl(String control) {
 		this.control = control;
+	}
+
+	public String getCodeLocX() {
+		return codeLocX;
+	}
+
+	public void setCodeLocX(String codeLocX) {
+		this.codeLocX = codeLocX;
+	}
+
+	public String getCodeLocY() {
+		return codeLocY;
+	}
+
+	public void setCodeLocY(String codeLocY) {
+		this.codeLocY = codeLocY;
+	}
+
+	public String getSystemLocX() {
+		return systemLocX;
+	}
+
+	public void setSystemLocX(String systemLocX) {
+		this.systemLocX = systemLocX;
+	}
+
+	public String getSystemLocY() {
+		return systemLocY;
+	}
+
+	public void setSystemLocY(String systemLocY) {
+		this.systemLocY = systemLocY;
 	}
 
 }

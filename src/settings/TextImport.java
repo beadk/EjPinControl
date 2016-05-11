@@ -21,8 +21,8 @@ public class TextImport {
 	private String mCodeSettingsText;
 	private String mCodeSettingsToolTipText;
 	private String mExitTooltipText;
-	private String mPrintSettingsText;
-	private String mPrintSettingsToolTipText;
+	private String mGSettingsText;
+	private String mGSettingsToolTipText;
 	private String mPrintPreviewText;
 	private String mPrintPreviewTooltipText;
 	private String mRestoDBText;
@@ -76,11 +76,16 @@ public class TextImport {
 	private String fileLocTFTooltipText;
 	private String defaultLocBText;
 	private String getFileBText;
-	private String printLText;
+	private String printLTextCode;
+	private String printLTextSystem;
 	private String writeLocXTooltipText;
 	private String writeLocYTooltipText;
 	private String pdfPreviewBText;
 	private String cancelSettingBText;
+	private String mSubSettingText;
+	private String mPrintSettingsText;
+	private String mPrintSettingsToolTipText;
+	private String languageText;
 	String[] tryA;
 
 	public void readDefault() {
@@ -162,11 +167,11 @@ public class TextImport {
 		case "mExitTooltipText":
 			mExitTooltipText = text[1];
 			break;
-		case "mPrintSettingsText":
-			mPrintSettingsText = text[1];
+		case "mGSettingsText":
+			mGSettingsText = text[1];
 			break;
-		case "mPrintSettingsToolTipText":
-			mPrintSettingsToolTipText = text[1];
+		case "mGSettingsToolTipText":
+			mGSettingsToolTipText = text[1];
 			break;
 		case "mPrintPreviewText":
 			mPrintPreviewText = text[1];
@@ -327,9 +332,11 @@ public class TextImport {
 		case "getFileBText":
 			getFileBText = text[1];
 			break;
-		case "printLText":
-			printLText = text[1];
+		case "printLTextCode":
+			printLTextCode = text[1];
 			break;
+		case "printLTextSystem":
+			printLTextSystem = text[1];
 		case "writeLocXTooltipText":
 			writeLocXTooltipText = text[1];
 			break;
@@ -341,6 +348,18 @@ public class TextImport {
 			break;
 		case "cancelSettingBText":
 			cancelSettingBText = text[1];
+			break;
+		case "mSubSettingText":
+			mSubSettingText = text[1];
+			break;
+		case "mPrintSettingsText":
+			mPrintSettingsText = text[1];
+			break;
+		case "mPrintSettingsToolTipText":
+			mPrintSettingsToolTipText = text[1];
+			break;
+		case "languageText":
+			languageText = text[1];
 			break;
 		default:
 		}
@@ -394,20 +413,20 @@ public class TextImport {
 		this.mExitTooltipText = mExitTooltipText;
 	}
 
-	public String getmPrintSettingsText() {
-		return mPrintSettingsText;
+	public String getmGSettingsText() {
+		return mGSettingsText;
 	}
 
-	public void setmPrintSettingsText(String mPrintSettingsText) {
-		this.mPrintSettingsText = mPrintSettingsText;
+	public void setmGSettingsText(String mGSettingsText) {
+		this.mGSettingsText = mGSettingsText;
 	}
 
-	public String getmPrintSettingsToolTipText() {
-		return mPrintSettingsToolTipText;
+	public String getmGSettingsToolTipText() {
+		return mGSettingsToolTipText;
 	}
 
-	public void setmPrintSettingsToolTipText(String mPrintSettingsToolTipText) {
-		this.mPrintSettingsToolTipText = mPrintSettingsToolTipText;
+	public void setmGSettingsToolTipText(String mGSettingsToolTipText) {
+		this.mGSettingsToolTipText = mGSettingsToolTipText;
 	}
 
 	public String getmPrintPreviewText() {
@@ -835,12 +854,12 @@ public class TextImport {
 		this.getFileBText = getFileBText;
 	}
 
-	public String getPrintLText() {
-		return printLText;
+	public String getPrintLTextCode() {
+		return printLTextCode;
 	}
 
-	public void setPrintLText(String printLText) {
-		this.printLText = printLText;
+	public void setPrintLTextCode(String printLText) {
+		this.printLTextCode = printLText;
 	}
 
 	public String getWriteLocXTooltipText() {
@@ -897,6 +916,46 @@ public class TextImport {
 
 	public void setDbname(String dbname) {
 		this.dbname = dbname;
+	}
+
+	public String getmSubSettingText() {
+		return mSubSettingText;
+	}
+
+	public void setmSubSettingText(String mSubSettingText) {
+		this.mSubSettingText = mSubSettingText;
+	}
+
+	public String getmPrintSettingsText() {
+		return mPrintSettingsText;
+	}
+
+	public void setmPrintSettingsText(String mPrintSettingsText) {
+		this.mPrintSettingsText = mPrintSettingsText;
+	}
+
+	public String getmPrintSettingsToolTipText() {
+		return mPrintSettingsToolTipText;
+	}
+
+	public void setmPrintSettingsToolTipText(String mPrintSettingsToolTipText) {
+		this.mPrintSettingsToolTipText = mPrintSettingsToolTipText;
+	}
+
+	public String getLanguageText() {
+		return languageText;
+	}
+
+	public void setLanguageText(String languageText) {
+		this.languageText = languageText;
+	}
+
+	public String getPrintLTextSystem() {
+		return printLTextSystem;
+	}
+
+	public void setPrintLTextSystem(String printLTextSystem) {
+		this.printLTextSystem = printLTextSystem;
 	}
 
 }

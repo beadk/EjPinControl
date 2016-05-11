@@ -32,9 +32,7 @@ public class Kode_gen {
 			i++;
 			String next = "";
 			String codePOS = "abcdefghijklmnopqrstuvwxyz0123456789";
-			System.out.println(codePOS.length());
 			String[] codeA = codePOS.split("");
-			System.out.println(codeA.length);
 			next = codeA[gen.nextInt(codeA.length)];
 			return kodeBogTal(kode + "" + next, i, codeLength);
 		}
@@ -42,7 +40,6 @@ public class Kode_gen {
 
 	public String kodeSSBogTal(String kode, int i, int codeLength) {
 		if (i == codeLength) {
-			System.out.println(kode + " " + isTrueSS(kode));
 			if (!isTrueSS(kode)) {
 				return kodeSSBogTal("", 0, codeLength);
 			} else {
@@ -71,12 +68,6 @@ public class Kode_gen {
 			i++;
 			return mockKode(kode + "" + 0, i, codeLength);
 		}
-	}
-
-	public byte[] genSalt() {
-		byte[] salt = new byte[8];
-		gen.nextBytes(salt);
-		return salt;
 	}
 
 	public boolean isTrueSS(String code) {

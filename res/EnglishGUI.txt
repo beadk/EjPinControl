@@ -3,8 +3,8 @@ mSettingsText; Settings
 mCodeSettingsText; Code Settings
 mCodeSettingsToolTipText; Opens the settings options for code generation.
 mExitTooltipText; Close Program
-mPrintSettingsText; Print Settings
-mPrintSettingsToolTipText; Opens up print settings
+mGSettingsText; General Settings
+mGSettingsToolTipText; Opens up general settings
 mPrintPreviewText; Print Preview
 mPrintPreviewTooltipText; Shows the layout of the print
 mRestoDBText; Restore Database
@@ -58,8 +58,13 @@ fileLocTFDefaultValue;
 fileLocTFTooltipText; If you don't want to write to file, leave this field empty
 defaultLocBText; Find Folder  
 getFileBText; Find File
-printLText; Print Placement
+printLTextCode; Code Placement
+printLTextSystem; System Placement
 writeLocXTooltipText; Coordinates 0,0 is located in the button left side of the document
 writeLocYTooltipText; Coordinates 0,0 is located in the button left side of the document
 pdfPreviewBText; Preview print out
 cancelSettingBText; Cancel
+mSubSettingText; Settings
+mPrintSettingsText; Print Settings
+mPrintSettingsToolTipText; Settings for where to print the system and code if they are to be printed.
+languageText; Language.
