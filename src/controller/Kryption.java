@@ -15,7 +15,7 @@ public class Kryption {
 				+ encoder.encode(str.getBytes());
 	}
 
-	public static String decrypt(String encstr) {
+	public String decrypt(String encstr) {
 		if (encstr.length() > 12) {
 			String cipher = encstr.substring(12);
 			BASE64Decoder decoder = new BASE64Decoder();

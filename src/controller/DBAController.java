@@ -34,6 +34,7 @@ public class DBAController {
 	
 	public List<SingleCodeDTO> GetCodes() throws Exception {
 		List<SingleCodeDTO> systems = new ArrayList<>();
+		cont.setDefaultLoc(defaultLoc);
 		String path = defaultLoc + "/PinGen/Dorma RS8";
 		try {
 

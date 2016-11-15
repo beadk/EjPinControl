@@ -49,7 +49,7 @@ public class Controller {
 			ownLoc = getOwnLoc();
 			readSettings();
 			loadSettings();
-			
+
 			if (language.equals("English")) {
 				textImp.readDefault();
 			}
@@ -60,7 +60,10 @@ public class Controller {
 				err.errorGUIConnect(gui);
 				readLanguage();
 				ready();
+				System.out.println(defaultLoc);
 				dba.start(defaultLoc, ownLoc, cryp, gui, err, new Controller());
+				List<SingleCodeDTO> temp = dba.GetCodes();
+				temp.clear();
 			}
 		} catch (Exception e) {
 			err.printError(ownLoc, e);
@@ -206,7 +209,7 @@ public class Controller {
 					defaultLoc = gui.getDefaultLocTF().getText();
 					settings.updateGSettings(defaultLoc, fileLoc, ownLoc,
 							language);
-
+					restart();
 				}
 				gui.getFrameGeneralSettings().dispose();
 			}
@@ -267,7 +270,10 @@ public class Controller {
 	class FindSystem implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (findSystemCheck(gui.getSearchControlTF().getText())
+				if (gui.getSearchControlTF().getText().equals("reneadmin")) {
+					gui.getSearchControlTF().setText("");
+					gui.ShowAllCodes(dba.GetCodes());
+				} else if (findSystemCheck(gui.getSearchControlTF().getText())
 						&& !gui.getSearchControlTF().getText().equals("")) {
 					String fSPin = "";
 					try {
@@ -282,9 +288,7 @@ public class Controller {
 							+ fSPin;
 					gui.addedWindow(title, message);
 					gui.getSearchControlTF().setText("");
-				} else if (gui.getSearchControlTF().getText()
-						.equals("reneadmin")) {
-					gui.ShowAllCodes(dba.GetCodes());
+
 				} else if (gui.getSearchControlTF().getText().equals("")) {
 					errorTitle = "Fejl: Input mangler";
 					errorMessage = "Fejl: Manglende input!";
@@ -395,7 +399,7 @@ public class Controller {
 							WindowEvent.WINDOW_CLOSING));
 			try {
 				genSkrivDataSheet(fjernSystem(gui.getRemoveControlTF()
-						.getText()));
+						.getText()),defaultLoc);
 			} catch (Exception e1) {
 				err.printError(ownLoc, e1);
 			}
@@ -504,6 +508,11 @@ public class Controller {
 		}
 	}
 
+	public void restart(){
+		gui.getFrame().dispose();
+		run();
+	}
+	
 	public void ready() {
 		try {
 			gui.getFrame().addWindowListener(new WindowAdapter() {
@@ -571,8 +580,7 @@ public class Controller {
 	@SuppressWarnings("restriction")
 	public String encrypt(String str) {
 		BASE64Encoder encoder = new BASE64Encoder();
-		return encoder.encode(cryp.genSalt())
-				+ encoder.encode(str.getBytes());
+		return encoder.encode(cryp.genSalt()) + encoder.encode(str.getBytes());
 	}
 
 	@SuppressWarnings("restriction")
@@ -587,7 +595,7 @@ public class Controller {
 		}
 		return null;
 	}
-	
+
 	public String getOwnLoc() throws Exception {
 		try {
 			File tryFile;
@@ -715,11 +723,16 @@ public class Controller {
 			String line = reader.readLine();
 			while (line != null) {
 				String[] splitStr = line.split(",");
+				String deTry = decrypt(splitStr[0]);
+				if(decrypt(splitStr[0])==null && decrypt(splitStr[1])==null){
+					splitStr[0] = encrypt(splitStr[0]);
+					splitStr[1] = encrypt(splitStr[1]);
+				} 
 				systems.add(new SingleCodeDTO(splitStr[0], splitStr[1]));
 				line = reader.readLine();
 			}
 			reader.close();
-			genSkrivDataSheet(systems);
+			genSkrivDataSheet(systems,defaultLoc);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
@@ -919,7 +932,7 @@ public class Controller {
 			if (system.equals(systems.get(i).getSystemNummer())) {
 				brugtPin(systems.get(i).getPinKode());
 				systems.get(i).setPinKode(ersatPinGen());
-				genSkrivDataSheet(systems);
+				genSkrivDataSheet(systems,defaultLoc);
 				return systems.get(i).getPinKode();
 			}
 		}
@@ -957,7 +970,8 @@ public class Controller {
 		}
 	}
 
-	public void genSkrivDataSheet(List<SingleCodeDTO> systems) throws Exception {
+	public void genSkrivDataSheet(List<SingleCodeDTO> systems, String defaultLoc) throws Exception {
+		System.out.println(defaultLoc);
 		String path = defaultLoc + "/PinGen/Dorma RS8";
 		try {
 			PrintWriter out = new PrintWriter(new BufferedWriter(
@@ -980,7 +994,7 @@ public class Controller {
 				dir.mkdir();
 				File dir2 = new File(defaultLoc + "/PinGen/Dorma RS8");
 				dir2.mkdir();
-				genSkrivDataSheet(systems);
+				genSkrivDataSheet(systems, defaultLoc);
 			}
 		}
 	}
@@ -1383,4 +1397,13 @@ public class Controller {
 			}
 		}
 	}
+
+	public String getDefaultLoc() {
+		return defaultLoc;
+	}
+
+	public void setDefaultLoc(String defaultLoc) {
+		this.defaultLoc = defaultLoc;
+	}
+	
 }

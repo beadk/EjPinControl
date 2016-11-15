@@ -272,9 +272,9 @@ public class GUI {
 	}
 
 	public void resizeFrameCodeSettings() {
-		systemPanel.setBounds(0, 0, frameCodeSettings.getWidth(),
+		panelSettings.setBounds(0, 0, frameCodeSettings.getWidth(),
 				frameCodeSettings.getHeight());
-		systemPanel.revalidate();
+		panelSettings.revalidate();
 	}
 	
 	public void resizeFrameGeneralSettings() {
