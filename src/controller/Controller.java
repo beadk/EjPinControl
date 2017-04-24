@@ -168,8 +168,8 @@ public class Controller {
 					|| gui.getSystemLocY().getText().equals("")
 					|| gui.getCodeLocX().getText().equals("")
 					|| gui.getCodeLocY().getText().equals("")) {
-				errorTitle = "Fejl: Input mangler";
-				errorMessage = "Fejl: Manglende input!";
+				errorTitle = gui.getInputError();
+				errorMessage = gui.getInputError();
 				gui.errorWindow(errorTitle, errorMessage);
 			} else {
 				try {
@@ -193,8 +193,8 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			if (gui.getDefaultLocTF().getText().equals("")
 					|| gui.getFileLocTF().getText().equals("")) {
-				errorTitle = "Fejl: Input mangler";
-				errorMessage = "Fejl: Manglende input!";
+				errorTitle = gui.getInputError();
+				errorMessage = gui.getInputError();
 				gui.errorWindow(errorTitle, errorMessage);
 			} else {
 				if (gui.getLanguage().getSelectedItem().toString()
@@ -282,22 +282,18 @@ public class Controller {
 					} catch (Exception e1) {
 						err.printError(ownLoc, e1);
 					}
-					String title = "Find system";
-					String message = "System "
-							+ gui.getSearchControlTF().getText() + " har pin: "
-							+ fSPin;
+					String title = gui.getFindSystem();
+					String message = gui.GetsystemFoundMS.replace(""!gui.getSearchControlTF().getText(),gui.getSearchControlTF().getText().replace("!fSPin", fSPin));
 					gui.addedWindow(title, message);
 					gui.getSearchControlTF().setText("");
 
 				} else if (gui.getSearchControlTF().getText().equals("")) {
-					errorTitle = "Fejl: Input mangler";
-					errorMessage = "Fejl: Manglende input!";
+					errorTitle = gui.getInputError();;
+					errorMessage = gui.getInputError();;
 					gui.errorWindow(errorTitle, errorMessage);
 				} else {
-					errorTitle = "Fejl: System ikke fundet";
-					errorMessage = "System "
-							+ gui.getSearchControlTF().getText()
-							+ " findes ikke i datafilen";
+					errorTitle = gui.getSystemNotFound();;
+					errorMessage = gui.getSystemNotFoundMS();
 					gui.errorWindow(errorTitle, errorMessage);
 				}
 			} catch (Exception e1) {
@@ -349,9 +345,8 @@ public class Controller {
 					&& !gui.getControlTF().getText().equals("")) {
 				try {
 					if (!checkSystem(gui.getControlTF().getText())) {
-						errorTitle = "Fejl: Brurgt system nummer";
-						errorMessage = "System " + gui.getControlTF().getText()
-								+ " er brugt og har allerede en pinkode";
+						errorTitle = gui.getErrorUsedNumber();
+						errorMessage = gui.getErrorUsedNumberMS();
 						gui.errorWindow(errorTitle, errorMessage);
 					} else {
 						try {
@@ -384,8 +379,8 @@ public class Controller {
 					err.printError(ownLoc, e1);
 				}
 			} else {
-				errorTitle = "Fejl: Input mangler";
-				errorMessage = "Fejl: Manglende input!";
+				errorTitle = gui.getInputError();
+				errorMessage = gui.getInputError();
 				gui.errorWindow(errorTitle, errorMessage);
 			}
 		}
@@ -399,7 +394,7 @@ public class Controller {
 							WindowEvent.WINDOW_CLOSING));
 			try {
 				genSkrivDataSheet(fjernSystem(gui.getRemoveControlTF()
-						.getText()),defaultLoc);
+						.getText()), defaultLoc);
 			} catch (Exception e1) {
 				err.printError(ownLoc, e1);
 			}
@@ -508,11 +503,11 @@ public class Controller {
 		}
 	}
 
-	public void restart(){
+	public void restart() {
 		gui.getFrame().dispose();
 		run();
 	}
-	
+
 	public void ready() {
 		try {
 			gui.getFrame().addWindowListener(new WindowAdapter() {
@@ -723,16 +718,28 @@ public class Controller {
 			String line = reader.readLine();
 			while (line != null) {
 				String[] splitStr = line.split(",");
-				String deTry = decrypt(splitStr[0]);
-				if(decrypt(splitStr[0])==null && decrypt(splitStr[1])==null){
-					splitStr[0] = encrypt(splitStr[0]);
-					splitStr[1] = encrypt(splitStr[1]);
-				} 
-				systems.add(new SingleCodeDTO(splitStr[0], splitStr[1]));
+				if (splitStr.length == 2) {
+					if (decrypt(splitStr[0]) == null
+							&& decrypt(splitStr[1]) == null) {
+						splitStr[0] = encrypt(splitStr[0]);
+						splitStr[1] = encrypt(splitStr[1]);
+					}
+					systems.add(new SingleCodeDTO(splitStr[0], splitStr[1]));
+				} else if (splitStr.length == 3) {
+					if (decrypt(splitStr[0]) == null
+							&& decrypt(splitStr[1]) == null
+							&& decrypt(splitStr[2]) == null) {
+						splitStr[0] = encrypt(splitStr[0]);
+						splitStr[1] = encrypt(splitStr[1]);
+						splitStr[2] = encrypt(splitStr[2]);
+					}
+					systems.add(new SingleCodeDTO(splitStr[0], splitStr[1],
+							splitStr[2]));
+				}
 				line = reader.readLine();
 			}
 			reader.close();
-			genSkrivDataSheet(systems,defaultLoc);
+			genSkrivDataSheet(systems, defaultLoc);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
@@ -747,7 +754,8 @@ public class Controller {
 		try {
 			PrintWriter out = new PrintWriter(new BufferedWriter(
 					new FileWriter(path + "/DormaRS8Pins.txt", true)));
-			out.write(encrypt("pin") + "," + encrypt("systems") + "\n");
+			out.write(encrypt("pin") + "," + encrypt("systems") + ","
+					+ encrypt("position") + "\n");
 			out.close();
 		} catch (IOException e) {
 			String prePath = defaultLoc + "/PinGen/Dorma RS8";
@@ -763,10 +771,6 @@ public class Controller {
 			}
 		}
 	}
-
-	// public void addSystem(String[] system) throws Exception {
-	// systems.add(new SingleCodeDTO(system[0], system[1]));
-	// }
 
 	public void runSettingsGUI() throws Exception {
 		gui.settingsGUI(defaultLoc, fileLoc);
@@ -932,7 +936,7 @@ public class Controller {
 			if (system.equals(systems.get(i).getSystemNummer())) {
 				brugtPin(systems.get(i).getPinKode());
 				systems.get(i).setPinKode(ersatPinGen());
-				genSkrivDataSheet(systems,defaultLoc);
+				genSkrivDataSheet(systems, defaultLoc);
 				return systems.get(i).getPinKode();
 			}
 		}
@@ -970,7 +974,8 @@ public class Controller {
 		}
 	}
 
-	public void genSkrivDataSheet(List<SingleCodeDTO> systems, String defaultLoc) throws Exception {
+	public void genSkrivDataSheet(List<SingleCodeDTO> systems, String defaultLoc)
+			throws Exception {
 		System.out.println(defaultLoc);
 		String path = defaultLoc + "/PinGen/Dorma RS8";
 		try {
@@ -1146,7 +1151,6 @@ public class Controller {
 		} catch (PrinterException e) {
 			err.printError(ownLoc, e);
 		}
-
 	}
 
 	public String CodeTypeToSystemValue(String codetype) {
@@ -1163,6 +1167,7 @@ public class Controller {
 		File[] la = dir.listFiles();
 		ArrayList<String> as = new ArrayList<String>();
 		as.add("English");
+		as.add("Danish");
 		if (la == null) {
 			File dir1 = new File(ownLoc + "/PinGen");
 			dir1.mkdir();
@@ -1405,5 +1410,5 @@ public class Controller {
 	public void setDefaultLoc(String defaultLoc) {
 		this.defaultLoc = defaultLoc;
 	}
-	
+
 }

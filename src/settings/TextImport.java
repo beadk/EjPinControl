@@ -86,6 +86,7 @@ public class TextImport {
 	private String mPrintSettingsText;
 	private String mPrintSettingsToolTipText;
 	private String languageText;
+	private String inputError;
 	String[] tryA;
 
 	public void readDefault() {
@@ -360,6 +361,9 @@ public class TextImport {
 			break;
 		case "languageText":
 			languageText = text[1];
+			break;
+		case "inputError":
+			inputError = text[1];
 			break;
 		default:
 		}
@@ -956,6 +960,14 @@ public class TextImport {
 
 	public void setPrintLTextSystem(String printLTextSystem) {
 		this.printLTextSystem = printLTextSystem;
+	}
+
+	public String getInputError() {
+		return inputError;
+	}
+
+	public void setInputError(String inputError) {
+		this.inputError = inputError;
 	}
 
 }

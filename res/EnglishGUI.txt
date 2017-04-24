@@ -68,3 +68,10 @@ mSubSettingText; Settings
 mPrintSettingsText; Print Settings
 mPrintSettingsToolTipText; Settings for where to print the system and code if they are to be printed.
 languageText; Language.
+inputError; Missing input.
+findSystem; Find System.
+systemFoundMS; System !gui.getSearchControlTF().getText() has pin: !fSPin.
+systemNotFound; System not found.
+systemNotFoundMS; System !gui.getSearchControlTF().getText() does not exist in the database.
+errorUsedNumber; Systemnumber already used.
+errorUsedNumberMS; System !gui.getControlTF().getText() is already in used.

@@ -131,6 +131,7 @@ public class GUI {
 	private String mPrintSettingsToolTipText;
 	private String languageText;
 	private String frameGeneralSettingsText;
+	private String inputError;
 
 	public void mainGUI(String name) {
 		frame = new JFrame(name);
@@ -302,13 +303,16 @@ public class GUI {
 		panelShowAll.setLayout(null);
 		frameShowAll.getContentPane().add(panelShowAll);
 		
-		String header[] = {"System","Code"};
+		String header[] = {"System","Code","Placement"};
 		
-		Object[][] codesO = new Object[systems.size()][2];
+		Object[][] codesO = new Object[systems.size()][3];
 		
 		for(int i = 0;i<systems.size();i++){
 			codesO[i][0] = systems.get(i).getSystemNummer();
 			codesO[i][1] = systems.get(i).getPinKode();
+			if(!systems.get(i).getPosition().equals("")){
+				codesO[i][2] = systems.get(i).getPosition();
+			}
 		}
 		
 		JPanel tablePanel = new JPanel();
@@ -1935,6 +1939,14 @@ public class GUI {
 
 	public void setFrameGeneralSettingsText(String frameGeneralSettingsText) {
 		this.frameGeneralSettingsText = frameGeneralSettingsText;
+	}
+
+	public String getInputError() {
+		return inputError;
+	}
+
+	public void setInputError(String inputError) {
+		this.inputError = inputError;
 	}
 
 }

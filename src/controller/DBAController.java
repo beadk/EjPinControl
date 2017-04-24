@@ -21,8 +21,9 @@ public class DBAController {
 	GUI gui;
 	ErrorHandler err;
 	Controller cont;
-	
-	public void start(String defaultLoc, String ownLoc, Kryption cryp, GUI gui, ErrorHandler err, Controller cont){
+
+	public void start(String defaultLoc, String ownLoc, Kryption cryp, GUI gui,
+			ErrorHandler err, Controller cont) {
 		this.defaultLoc = defaultLoc;
 		this.ownLoc = ownLoc;
 		this.gui = gui;
@@ -30,8 +31,7 @@ public class DBAController {
 		this.err = err;
 		this.cont = cont;
 	}
-	
-	
+
 	public List<SingleCodeDTO> GetCodes() throws Exception {
 		List<SingleCodeDTO> systems = new ArrayList<>();
 		cont.setDefaultLoc(defaultLoc);
@@ -47,8 +47,16 @@ public class DBAController {
 				if (cryp.decrypt(line.split(",")[0]).equals("pin")) {
 					line = reader.readLine();
 				} else {
-					systems.add(new SingleCodeDTO(cryp.decrypt(line.split(",")[0]),
-							cryp.decrypt(line.split(",")[1]).replace(" ", "")));
+					if (line.split(",").length == 2) {
+						systems.add(new SingleCodeDTO(cryp.decrypt(line
+								.split(",")[0]), cryp.decrypt(
+								line.split(",")[1]).replace(" ", "")));
+					} else if (line.split(",").length == 3) {
+						systems.add(new SingleCodeDTO(cryp.decrypt(line
+								.split(",")[0]), cryp.decrypt(
+								line.split(",")[1]).replace(" ", ""), cryp
+								.decrypt(line.split(",")[2]).replace(" ", "")));
+					}
 					line = reader.readLine();
 				}
 			}

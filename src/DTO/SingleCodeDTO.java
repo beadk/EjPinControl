@@ -3,10 +3,18 @@ package DTO;
 public class SingleCodeDTO {
 	private String pinKode;
 	private String systemNummer;
-	
-	public SingleCodeDTO(String pinKode, String systemNummer){
-		this.pinKode=pinKode;
-		this.systemNummer=systemNummer;
+	private String position;
+
+	public SingleCodeDTO(String pinKode, String systemNummer) {
+		this.pinKode = pinKode;
+		this.systemNummer = systemNummer;
+		this.position = "";
+	}
+
+	public SingleCodeDTO(String pinKode, String systemNummer, String position) {
+		this.pinKode = pinKode;
+		this.systemNummer = systemNummer;
+		this.position = position;
 	}
 
 	public String getPinKode() {
@@ -23,6 +31,14 @@ public class SingleCodeDTO {
 
 	public void setSystemNummer(String systemNummer) {
 		this.systemNummer = systemNummer;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
 }
