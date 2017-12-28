@@ -40,7 +40,7 @@ public class Controller {
 	JFileChooser chooser;
 	ErrorHandler err = new ErrorHandler();
 	private String fileLoc, defaultLoc, ownLoc, errorTitle, errorMessage,
-			comfirmTitle, comfirmMessage, codeType, language, control, dbname;
+			confirmTitle, confirmMessage, codeType, language, control, dbname;
 	private int codeLength;
 	private float fCodeLocX, fCodeLocY, fSystemLocX, fSystemLocY;
 
@@ -52,6 +52,8 @@ public class Controller {
 
 			if (language.equals("English")) {
 				textImp.readDefault();
+			} else if(language.equals("Danish")){
+				textImp.readDansk();
 			}
 			if (defaultLoc != null) {
 				setGUIText(textImp.getFields());
@@ -212,6 +214,7 @@ public class Controller {
 					restart();
 				}
 				gui.getFrameGeneralSettings().dispose();
+				settings.writeSettings(ownLoc);
 			}
 		}
 
@@ -283,16 +286,22 @@ public class Controller {
 						err.printError(ownLoc, e1);
 					}
 					String title = gui.getFindSystem();
-					String message = gui.GetsystemFoundMS.replace(""!gui.getSearchControlTF().getText(),gui.getSearchControlTF().getText().replace("!fSPin", fSPin));
+					String message = gui.getSystemFoundMS().replace(
+							gui.getSearchControlTF().getText(),
+							gui.getSearchControlTF().getText()
+									.replace("!fSPin", fSPin));
 					gui.addedWindow(title, message);
 					gui.getSearchControlTF().setText("");
 
 				} else if (gui.getSearchControlTF().getText().equals("")) {
-					errorTitle = gui.getInputError();;
-					errorMessage = gui.getInputError();;
+					errorTitle = gui.getInputError();
+					;
+					errorMessage = gui.getInputError();
+					;
 					gui.errorWindow(errorTitle, errorMessage);
 				} else {
-					errorTitle = gui.getSystemNotFound();;
+					errorTitle = gui.getSystemNotFound();
+					;
 					errorMessage = gui.getSystemNotFoundMS();
 					gui.errorWindow(errorTitle, errorMessage);
 				}
@@ -346,7 +355,9 @@ public class Controller {
 				try {
 					if (!checkSystem(gui.getControlTF().getText())) {
 						errorTitle = gui.getErrorUsedNumber();
-						errorMessage = gui.getErrorUsedNumberMS();
+						errorMessage = gui.getErrorUsedNumberMS().replace(
+								"!gui.getControlTF().getText()",
+								gui.getControlTF().getText());
 						gui.errorWindow(errorTitle, errorMessage);
 					} else {
 						try {
@@ -356,11 +367,11 @@ public class Controller {
 						} catch (Exception e2) {
 							err.printError(ownLoc, e2);
 						}
-						String title = "System tilføjet";
-						String message = "System "
-								+ gui.getControlTF().getText()
-								+ " er blevet tilføjet med pin: "
-								+ gui.getCodeTF().getText();
+						String title = gui.getControlAdded();
+						String message = gui.getControlAddedMS().replace(
+								"!gui.getControlTF().getText()",
+								gui.getControlTF().getText())
+								+ " " + gui.getCodeTF().getText();
 						gui.addedWindow(title, message);
 						if (fileLoc != null) {
 							try {
@@ -389,8 +400,8 @@ public class Controller {
 	class bekæftFjernelse implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			gui.getRemoveControlTF().setText("");
-			gui.getComfirmRemovalFrame().dispatchEvent(
-					new WindowEvent(gui.getComfirmRemovalFrame(),
+			gui.getConfirmRemovalFrame().dispatchEvent(
+					new WindowEvent(gui.getConfirmRemovalFrame(),
 							WindowEvent.WINDOW_CLOSING));
 			try {
 				genSkrivDataSheet(fjernSystem(gui.getRemoveControlTF()
@@ -403,8 +414,8 @@ public class Controller {
 
 	class nej implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			gui.getComfirmRemovalFrame().dispatchEvent(
-					new WindowEvent(gui.getComfirmRemovalFrame(),
+			gui.getConfirmRemovalFrame().dispatchEvent(
+					new WindowEvent(gui.getConfirmRemovalFrame(),
 							WindowEvent.WINDOW_CLOSING));
 			gui.getRemoveControlTF().setText("");
 		}
@@ -415,16 +426,16 @@ public class Controller {
 			if (!gui.getRemoveControlTF().getText().equals("")) {
 				try {
 					if (!findSystemCheck(gui.getRemoveControlTF().getText())) {
-						errorTitle = "Fejl: System ikke fundet";
-						errorMessage = "Fejl: Det opgivet system findes ikke i databasen.";
+						errorTitle = gui.getSystemNotFound();
+						errorMessage = gui.getSystemNotFoundMS();
 						gui.errorWindow(errorTitle, errorMessage);
 					} else {
-						comfirmTitle = "Bekæft fjernelse";
-						comfirmMessage = "Vi du fjerne system: "
+						confirmTitle = gui.getConfirmRemoval();
+						confirmMessage = gui.getConfirmRemovalMS() + " "
 								+ gui.getRemoveControlTF().getText();
-						gui.comfirmFrame(comfirmTitle, comfirmMessage);
+						gui.confirmFrame(confirmTitle, confirmMessage);
 						try {
-							gui.getComfirmRemovalB().addActionListener(
+							gui.getConfirmRemovalB().addActionListener(
 									new bekæftFjernelse());
 							gui.getNoButton().addActionListener(new nej());
 						} catch (NullPointerException e1) {
@@ -435,8 +446,8 @@ public class Controller {
 					err.printError(ownLoc, e1);
 				}
 			} else {
-				errorTitle = "Fejl: Input mangler";
-				errorMessage = "Fejl: Manglende input!";
+				errorTitle = gui.getInputError();
+				errorMessage = gui.getInputErrorMS();
 				gui.errorWindow(errorTitle, errorMessage);
 			}
 		}
@@ -472,12 +483,12 @@ public class Controller {
 	class FjernPin implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (!gui.getReplaceCodeTF().getText().equals("")) {
-				comfirmTitle = "Bekæft fjernelse";
-				comfirmMessage = "Vi du ersatte pin til system: "
+				confirmTitle = gui.getPinReplacementConfirm();
+				confirmMessage = gui.getPinReplacementConfirmMS() + " "
 						+ gui.getReplaceCodeTF().getText();
-				gui.comfirmFrame(comfirmTitle, comfirmMessage);
+				gui.confirmFrame(confirmTitle, confirmMessage);
 				try {
-					gui.getComfirmRemovalB().addActionListener(
+					gui.getConfirmRemovalB().addActionListener(
 							new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
 									try {
@@ -487,7 +498,7 @@ public class Controller {
 										err.printError(ownLoc, e1);
 									}
 									gui.getReplaceCodeTF().setText("");
-									gui.getComfirmRemovalFrame().dispose();
+									gui.getConfirmRemovalFrame().dispose();
 								}
 							});
 					gui.getNoButton().addActionListener(new nej());
@@ -496,8 +507,8 @@ public class Controller {
 				}
 
 			} else {
-				errorTitle = "Fejl: Input mangler";
-				errorMessage = "Fejl: Manglende input!";
+				errorTitle = gui.getInputError();
+				errorMessage = gui.getInputErrorMS();
 				gui.errorWindow(errorTitle, errorMessage);
 			}
 		}
@@ -624,10 +635,8 @@ public class Controller {
 			control = settings.getControl();
 			dbname = settings.getDbname();
 		} catch (NullPointerException e) {
-			errorTitle = "Ingen Indstillinger fundet";
-			errorMessage = "<html>Der er ikke blevet fundet nogen indstilling.<br> "
-					+ "Indstillinger er sat til default."
-					+ "<br> Det anbefales du ændre disse før du forsætter.</html>";
+			errorTitle = gui.getNoSettingsError();
+			errorMessage =gui.getNoSettingsErrorMS();
 			gui.noSettings(errorTitle, errorMessage);
 			startDefault();
 		}
@@ -773,7 +782,7 @@ public class Controller {
 	}
 
 	public void runSettingsGUI() throws Exception {
-		gui.settingsGUI(defaultLoc, fileLoc);
+		gui.settingsGUI(defaultLoc, fileLoc, language);
 		gui.getSaveSettingsB().addActionListener(new SaveSettingsGeneral());
 		gui.getCancelSettingB().addActionListener(new CancelSettings());
 		gui.getDefaultSettingB().addActionListener(new DefaultSettings());
@@ -805,10 +814,10 @@ public class Controller {
 			}
 			reader.close();
 		} catch (FileNotFoundException ex) {
-			errorTitle = "Ingen Indstillinger fundet";
-			errorMessage = "<html>Der er ikke blevet fundet nogen indstilling.<br> "
-					+ "Indstillinger er sat til default."
-					+ "<br> Det anbefales du ændre disse før du forsætter.</html>";
+			textImp.readDefault();
+			setGUIText(textImp.getFields());
+			errorTitle = gui.getNoSettingsError();
+			errorMessage = gui.getNoSettingsErrorMS();
 			gui.noSettings(errorTitle, errorMessage);
 			startDefault();
 		} catch (IOException ex) {
@@ -1041,7 +1050,7 @@ public class Controller {
 				gui.mainGUI(name);
 			ready();
 		} catch (FileNotFoundException ex) {
-			gui.settingsGUI(defaultLoc, fileLoc);
+			gui.settingsGUI(defaultLoc, fileLoc, language);
 		} catch (IOException ex) {
 			err.printError(ownLoc, ex);
 		}
@@ -1228,7 +1237,7 @@ public class Controller {
 				gui.setCodeLabelText(textImp.getCodeLabelText());
 				break;
 			case "controlItemLabelText":
-				gui.setControlItemLabelText(textImp.getCodeLabelText());
+				gui.setControlItemLabelText(textImp.getControlItemLabelText());
 				break;
 			case "addSystemBText":
 				gui.setAddSystemBText(textImp.getAddSystemBText());
@@ -1328,8 +1337,8 @@ public class Controller {
 			case "emailErrCText":
 				gui.setEmailErrCText(textImp.getEmailErrCText());
 				break;
-			case "comfirmRemovalBText":
-				gui.setComfirmRemovalBText(textImp.getComfirmRemovalBText());
+			case "confirmRemovalBText":
+				gui.setConfirmRemovalBText(textImp.getConfirmRemovalBText());
 				break;
 			case "noButtonText":
 				gui.setNoButtonText(textImp.getNoButtonText());
@@ -1340,8 +1349,8 @@ public class Controller {
 			case "dbNotFoundLText":
 				gui.setDbNotFoundLText(textImp.getDbNotFoundLText());
 				break;
-			case "comfirmCreateBText":
-				gui.setComfirmCreateBText(textImp.getComfirmCreateBText());
+			case "confirmCreateBText":
+				gui.setConfirmCreateBText(textImp.getConfirmCreateBText());
 				break;
 			case "dbErrorBCreateBackupText":
 				gui.setDbErrorBCreateBackupText(textImp
@@ -1398,6 +1407,54 @@ public class Controller {
 				break;
 			case "languageText":
 				gui.setLanguageText(textImp.getLanguageText());
+				break;
+			case "inputError":
+				gui.setInputError(textImp.getInputError());
+				break;
+			case "inputErrorMS":
+				gui.setInputErrorMS(textImp.getInputErrorMS());
+				break;
+			case "findSystem":
+				gui.setFindSystem(textImp.getFindSystem());
+				break;
+			case "systemFoundMS":
+				gui.setSystemFoundMS(textImp.getSystemFoundMS());
+				break;
+			case "systemNotFound":
+				gui.setSystemNotFound(textImp.getSystemNotFound());
+				break;
+			case "systemNotFoundMS":
+				gui.setSystemNotFoundMS(textImp.getSystemNotFoundMS());
+				break;
+			case "errorUsedNumber":
+				gui.setErrorUsedNumber(textImp.getErrorUsedNumber());
+				break;
+			case "errorUsedNumberMS":
+				gui.setErrorUsedNumberMS(textImp.getErrorUsedNumberMS());
+				break;
+			case "controlAdded":
+				gui.setControlAdded(textImp.getControlAdded());
+				break;
+			case "controlAddedMS":
+				gui.setControlAddedMS(textImp.getControlAddedMS());
+				break;
+			case "confirmRemoval":
+				gui.setConfirmRemoval(textImp.getConfirmRemoval());
+				break;
+			case "confirmRemovalMS":
+				gui.setConfirmRemovalMS(textImp.getConfirmRemovalMS());
+				break;
+			case "pinReplacementConfirm":
+				gui.setPinReplacementConfirm(textImp.getPinReplacementConfirm());
+				break;
+			case "pinReplacementConfirmMS":
+				gui.setPinReplacementConfirmMS(textImp.getPinReplacementConfirmMS());
+				break;
+			case "noSettingsError":
+				gui.setNoSettingsError(textImp.getNoSettingsError());
+				break;
+			case "noSettingsErrorMS":
+				gui.setNoSettingsErrorMS(textImp.getNoSettingsErrorMS());
 				break;
 			}
 		}

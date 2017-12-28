@@ -22,7 +22,7 @@ searchControlTFTooltipText; Searches the database for the given !control!
 removeControlTFTooltipText; Removes the !control! from the database
 replaceCodeTFTooltipText; Replaces the code of a given !control! in the database
 defaultCodeValue; 00000
-codeTFTooltipText; <html>The code to be saved to the !control!<br> This code can't be changed in a hand<br> after a new one has been generated.</html>
+codeTFTooltipText; The code to be saved to the !control!<br> This code can't be changed in a hand<br> after a new one has been generated.
 controlDefaultValue; 
 controlTFTooltipText; The name, number or value given to the !control!
 frameAddControlText; Add new !control!
@@ -30,10 +30,10 @@ cancelBText; Cancel
 frameCodeSettingsText; Code Settings
 codeLengthLabelText; Length of the code
 codeLengthFText; 5
-codeLengthFTextTooltipText; <html>Defines the length of a new code. <br>The longer the code, the stronger it is.<br> The length should be between 4-30 symbols
+codeLengthFTextTooltipText; Defines the length of a new code. <br>The longer the code, the stronger it is.<br> The length should be between 4-30 symbols
 codeStrengthLText; Type of the code
 codeTypeArrayText; Numbers,Numbers and letters,Numbers and small and big letters
-codeTypeTooltipText; <html>Decides the strength of the code.<br> The strongst code will be a combination of length and<br> the mixture of numbers and small and big letters</html>
+codeTypeTooltipText; Decides the strength of the code.<br> The strongst code will be a combination of length and<br> the mixture of numbers and small and big letters
 saveSettingsBText; Save Settings
 defaultSettingBText; Default Settings
 errorLText; An exception, !errorEX! , has occured
@@ -43,12 +43,12 @@ emailErrFTooltipText; Leave this field empty, if you don't want a reply with pos
 emailErrDesLText; What happened?
 emailErrBText; Send Error Message
 emailErrCText; Dont Send
-comfirmRemovalBText; Comfirm
+confirmRemovalBText; Confirm
 noButtonText; No
 dbNotFoundText; Database not found
-dbNotFoundLText; Unable to find the database, or database might not exist
-comfirmCreateBText; Comfirm
-comfirmCreateBTooltipText; Comfirms creation of new database
+dbNotFoundLText; Unable to find the database, or the database might not exist
+confirmCreateBText; Confirm
+confirmCreateBTooltipText; Confirms creation of new database
 dbErrorBCreateBackupText; Create from backup
 dbErrorBCreateBackupTooltipText; Creates database from backup
 labelDefaultText; Folder Placement
@@ -60,8 +60,8 @@ defaultLocBText; Find Folder
 getFileBText; Find File
 printLTextCode; Code Placement
 printLTextSystem; System Placement
-writeLocXTooltipText; Coordinates 0,0 is located in the button left side of the document
-writeLocYTooltipText; Coordinates 0,0 is located in the button left side of the document
+writeLocXTooltipText; Coordinates 0,0 is located in the bottom left side of the document
+writeLocYTooltipText; Coordinates 0,0 is located in the bottom left side of the document
 pdfPreviewBText; Preview print out
 cancelSettingBText; Cancel
 mSubSettingText; Settings
@@ -69,9 +69,18 @@ mPrintSettingsText; Print Settings
 mPrintSettingsToolTipText; Settings for where to print the system and code if they are to be printed.
 languageText; Language.
 inputError; Missing input.
+inputErrorMS; No input given.
 findSystem; Find System.
 systemFoundMS; System !gui.getSearchControlTF().getText() has pin: !fSPin.
 systemNotFound; System not found.
 systemNotFoundMS; System !gui.getSearchControlTF().getText() does not exist in the database.
-errorUsedNumber; Systemnumber already used.
+errorUsedNumber; Systemnumber is already used.
 errorUsedNumberMS; System !gui.getControlTF().getText() is already in used.
+controlAdded; !control! Added.
+controlAddedMS; !control! !gui.getControlTF().getText() has been added with pin:
+confirmRemoval; Confirm Removal.
+confirmRemovalMS; Confirm removal of:
+pinReplacementConfirm; Confirm replacement of Pin.
+pinReplacementConfirmMS; Confirm replacement of pin for !control!:
+noSettingsError; No settings found.
+noSettingsErrorMS; No Settings has been found.<br> Settings has been sat to default.<br> It is recommended you change these before moving on.

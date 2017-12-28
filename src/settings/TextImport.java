@@ -14,7 +14,7 @@ import DTO.FieldsDTO;
 public class TextImport {
 
 	List<FieldsDTO> fields = new ArrayList<>();
-	private String control = "";
+	private String control = "System";
 	private String dbname = "";
 	private String mFileText;
 	private String mSettingsText;
@@ -61,12 +61,12 @@ public class TextImport {
 	private String emailErrDesLText;
 	private String emailErrBText;
 	private String emailErrCText;
-	private String comfirmRemovalBText;
+	private String confirmRemovalBText;
 	private String noButtonText;
 	private String dbNotFoundText;
 	private String dbNotFoundLText;
-	private String comfirmCreateBText;
-	private String comfirmCreateBTooltipText;
+	private String confirmCreateBText;
+	private String confirmCreateBTooltipText;
 	private String dbErrorBCreateBackupText;
 	private String dbErrorBCreateBackupTooltipText;
 	private String labelDefaultText;
@@ -87,6 +87,21 @@ public class TextImport {
 	private String mPrintSettingsToolTipText;
 	private String languageText;
 	private String inputError;
+	private String inputErrorMS;
+	private String findSystem;
+	private String systemFoundMS;
+	private String systemNotFound;
+	private String systemNotFoundMS;
+	private String errorUsedNumber;
+	private String errorUsedNumberMS;
+	private String controlAdded;
+	private String controlAddedMS;
+	private String confirmRemoval;
+	private String confirmRemovalMS;
+	private String pinReplacementConfirm;
+	private String pinReplacementConfirmMS;
+	private String noSettingsError;
+	private String noSettingsErrorMS;
 	String[] tryA;
 
 	public void readDefault() {
@@ -117,6 +132,34 @@ public class TextImport {
 		}
 	}
 
+	public void readDansk(){
+		try {
+			FileInputStream file = new FileInputStream("res/DanskGUI.txt");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					file));
+			String line = reader.readLine();
+			while (line != null) {
+				tryA = line.split(";");
+				if (tryA[1].contains("!control!")) {
+					tryA[1] = tryA[1].replace("!control!", control);
+					setText(tryA);
+					fields.add(new FieldsDTO(tryA[0]));
+				} else if (tryA[1].contains("!dbname!")) {
+					tryA[1] = tryA[1].replace("!dbname!", dbname);
+					setText(tryA);
+					fields.add(new FieldsDTO(tryA[0]));
+				} else {
+					setText(tryA);
+					fields.add(new FieldsDTO(tryA[0]));
+				}
+				line = reader.readLine();
+			}
+			reader.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	// public void readEnglishText(String path) {
 	// try {
 	// FileInputStream file = new FileInputStream(path + "/EnglishGUI.txt");
@@ -288,8 +331,8 @@ public class TextImport {
 		case "emailErrCText":
 			emailErrCText = text[1];
 			break;
-		case "comfirmRemovalBText":
-			comfirmRemovalBText = text[1];
+		case "confirmRemovalBText":
+			confirmRemovalBText = text[1];
 			break;
 		case "noButtonText":
 			noButtonText = text[1];
@@ -300,11 +343,11 @@ public class TextImport {
 		case "dbNotFoundLText":
 			dbNotFoundLText = text[1];
 			break;
-		case "comfirmCreateBText":
-			comfirmCreateBText = text[1];
+		case "confirmCreateBText":
+			confirmCreateBText = text[1];
 			break;
-		case "comfirmCreateBTooltipText":
-			comfirmCreateBTooltipText = text[1];
+		case "confirmCreateBTooltipText":
+			confirmCreateBTooltipText = text[1];
 			break;
 		case "dbErrorBCreateBackupText":
 			dbErrorBCreateBackupText = text[1];
@@ -364,6 +407,51 @@ public class TextImport {
 			break;
 		case "inputError":
 			inputError = text[1];
+			break;
+		case "inputErrorMS":
+			inputErrorMS = text[1];
+			break;
+		case "findSystem":
+			findSystem = text[1];
+			break;
+		case "systemFoundMS":
+			systemFoundMS = text[1];
+			break;
+		case "systemNotFound":
+			systemNotFound = text[1];
+			break;
+		case "systemNotFoundMS":
+			systemNotFoundMS = text[1];
+			break;
+		case "errorUsedNumber":
+			errorUsedNumber = text[1];
+			break;
+		case "errorUsedNumberMS":
+			errorUsedNumberMS = text[1];
+			break;
+		case "controlAdded":
+			controlAdded = text[1];
+			break;
+		case "controlAddedMS":
+			controlAddedMS = text[1];
+			break;
+		case "confirmRemoval":
+			confirmRemoval = text[1];
+			break;
+		case "confirmRemovalMS":
+			confirmRemovalMS = text[1];
+			break;
+		case "pinReplacementConfirm":
+			pinReplacementConfirm = text[1];
+			break;
+		case "pinReplacementConfirmMS":
+			pinReplacementConfirmMS = text[1];
+			break;
+		case "noSettingsError":
+			noSettingsError = text[1];
+			break;
+		case "noSettingsErrorMS":
+			noSettingsErrorMS = text[1];
 			break;
 		default:
 		}
@@ -737,12 +825,12 @@ public class TextImport {
 		this.emailErrCText = emailErrCText;
 	}
 
-	public String getComfirmRemovalBText() {
-		return comfirmRemovalBText;
+	public String getConfirmRemovalBText() {
+		return confirmRemovalBText;
 	}
 
-	public void setComfirmRemovalBText(String comfirmRemovalBText) {
-		this.comfirmRemovalBText = comfirmRemovalBText;
+	public void setConfirmRemovalBText(String confirmRemovalBText) {
+		this.confirmRemovalBText = confirmRemovalBText;
 	}
 
 	public String getNoButtonText() {
@@ -769,20 +857,20 @@ public class TextImport {
 		this.dbNotFoundLText = dbNotFoundLText;
 	}
 
-	public String getComfirmCreateBText() {
-		return comfirmCreateBText;
+	public String getConfirmCreateBText() {
+		return confirmCreateBText;
 	}
 
-	public void setComfirmCreateBText(String comfirmCreateBText) {
-		this.comfirmCreateBText = comfirmCreateBText;
+	public void setConfirmCreateBText(String confirmCreateBText) {
+		this.confirmCreateBText = confirmCreateBText;
 	}
 
-	public String getComfirmCreateBTooltipText() {
-		return comfirmCreateBTooltipText;
+	public String getConfirmCreateBTooltipText() {
+		return confirmCreateBTooltipText;
 	}
 
-	public void setComfirmCreateBTooltipText(String comfirmCreateBTooltipText) {
-		this.comfirmCreateBTooltipText = comfirmCreateBTooltipText;
+	public void setConfirmCreateBTooltipText(String confirmCreateBTooltipText) {
+		this.confirmCreateBTooltipText = confirmCreateBTooltipText;
 	}
 
 	public String getDbErrorBCreateBackupText() {
@@ -970,4 +1058,124 @@ public class TextImport {
 		this.inputError = inputError;
 	}
 
+	public String getInputErrorMS() {
+		return inputErrorMS;
+	}
+
+	public void setInputErrorMS(String inputErrorMS) {
+		this.inputErrorMS = inputErrorMS;
+	}
+
+	public String getFindSystem() {
+		return findSystem;
+	}
+
+	public void setFindSystem(String findSystem) {
+		this.findSystem = findSystem;
+	}
+
+	public String getSystemFoundMS() {
+		return systemFoundMS;
+	}
+
+	public void setSystemFoundMS(String systemFoundMS) {
+		this.systemFoundMS = systemFoundMS;
+	}
+
+	public String getSystemNotFound() {
+		return systemNotFound;
+	}
+
+	public void setSystemNotFound(String systemNotFound) {
+		this.systemNotFound = systemNotFound;
+	}
+
+	public String getSystemNotFoundMS() {
+		return systemNotFoundMS;
+	}
+
+	public void setSystemNotFoundMS(String systemNotFoundMS) {
+		this.systemNotFoundMS = systemNotFoundMS;
+	}
+
+	public String getErrorUsedNumber() {
+		return errorUsedNumber;
+	}
+
+	public void setErrorUsedNumber(String errorUsedNumber) {
+		this.errorUsedNumber = errorUsedNumber;
+	}
+
+	public String getErrorUsedNumberMS() {
+		return errorUsedNumberMS;
+	}
+
+	public void setErrorUsedNumberMS(String errorUsedNumberMS) {
+		this.errorUsedNumberMS = errorUsedNumberMS;
+	}
+
+	public String getControlAdded() {
+		return controlAdded;
+	}
+
+	public void setControlAdded(String controlAdded) {
+		this.controlAdded = controlAdded;
+	}
+
+	public String getControlAddedMS() {
+		return controlAddedMS;
+	}
+
+	public void setControlAddedMS(String controlAddedMS) {
+		this.controlAddedMS = controlAddedMS;
+	}
+
+	public String getConfirmRemoval() {
+		return confirmRemoval;
+	}
+
+	public void setConfirmRemoval(String confirmRemoval) {
+		this.confirmRemoval = confirmRemoval;
+	}
+
+	public String getConfirmRemovalMS() {
+		return confirmRemovalMS;
+	}
+
+	public void setConfirmRemovalMS(String confirmRemovalMS) {
+		this.confirmRemovalMS = confirmRemovalMS;
+	}
+
+	public String getPinReplacementConfirm() {
+		return pinReplacementConfirm;
+	}
+
+	public void setPinReplacementConfirm(String pinReplacementConfirm) {
+		this.pinReplacementConfirm = pinReplacementConfirm;
+	}
+
+	public String getPinReplacementConfirmMS() {
+		return pinReplacementConfirmMS;
+	}
+
+	public void setPinReplacementConfirmMS(String pinReplacementConfirmMS) {
+		this.pinReplacementConfirmMS = pinReplacementConfirmMS;
+	}
+
+	public String getNoSettingsError() {
+		return noSettingsError;
+	}
+
+	public void setNoSettingsError(String noSettingsError) {
+		this.noSettingsError = noSettingsError;
+	}
+
+	public String getNoSettingsErrorMS() {
+		return noSettingsErrorMS;
+	}
+
+	public void setNoSettingsErrorMS(String noSettingsErrorMS) {
+		this.noSettingsErrorMS = noSettingsErrorMS;
+	}
+	
 }

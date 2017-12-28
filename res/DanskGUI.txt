@@ -1,0 +1,86 @@
+mFileText; File
+mSettingsText; Indstillinger
+mCodeSettingsText; Kodeindstillinger
+mCodeSettingsToolTipText; Åbner indstillingsmuligheder for kodegenerering.
+mExitTooltipText; Luk Program
+mGSettingsText; Generelle indstillinger
+mGSettingsToolTipText; Åbner generelle indstillinger
+mPrintPreviewText; Udskriv forhåndsvisning
+mPrintPreviewTooltipText; Viser layoutet af print
+mRestoDBText; Gendan database
+mRestoDBTooltipText; Gendan databasen fra backup
+dbNameText; !dbname!
+codeLabelText; Kode
+controlItemLabelText; !control!
+addSystemBText; Tilføj !control!
+newCodeBText; Ny Kode
+saveCodeBText; Gem Kode
+searchControlBText; Find !control!
+removeControlBText; Fjern !control!
+replaceCodeBText; Erstat kode
+searchControlTFTooltipText; Søger i databasen for det givne !control!
+removeControlTFTooltipText; Fjerner !control!et fra databasen
+replaceCodeTFTooltipText; Erstatter koden til et given !control! i databasen
+defaultCodeValue; 00000
+codeTFTooltipText; Koden, der skal gemmes til !control!et<br> Denne kode kan ikke ændres i en hånd<br> efter at en ny er blevet genereret.
+controlDefaultValue; 
+controlTFTooltipText; Det navn, nummer eller værdi givet til !control!et
+frameAddControlText; Tilføj ny !control!
+cancelBText; Annullerer
+frameCodeSettingsText; Kodeindstillinger
+codeLengthLabelText; Længde af koden
+codeLengthFText; 5
+codeLengthFTextTooltipText; Definerer længden af en ny kode. <br>Jo længere koden er, desto stærkere er den.<br> Længden skal være mellem 4-30 symboler
+codeStrengthLText; Type af koden
+codeTypeArrayText; Tal, tal og bogstaver, tal og små og store bogstaver
+codeTypeTooltipText; Bestemmer styrken af koden.<br> Den stærkeste kode vil være en kombination af længde og<br> blandingen af tal og små og store bogstaver
+saveSettingsBText; Gem indstillinger
+defaultSettingBText; Standardindstillinger
+errorLText; En fejl, !errorEX! , er opstået
+emailErrLText; Your email
+defaultEmailErrFText; 
+emailErrFTooltipText; Lad dette felt være tomt, hvis du ikke vil have et svar med mulig hjælp
+emailErrDesLText; Hvad skete der?
+emailErrBText; Send fejlmeddelelse
+emailErrCText; Send ikke
+confirmRemovalBText; Bekræfte
+noButtonText; Nej
+dbNotFoundText; Database ikke fundet
+dbNotFoundLText; Kan ikke finde databasen, eller databasen eksisterer muligvis ikke
+confirmCreateBText; Bekræfte oprettelse
+confirmCreateBTooltipText; Bekræfter oprettelse af ny database
+dbErrorBCreateBackupText; Opret fra backup
+dbErrorBCreateBackupTooltipText; Creates database from backup
+labelDefaultText; Mappeplacering
+defaultLocTFText; 
+filePlaceLText; File Placement
+fileLocTFDefaultValue; 
+fileLocTFTooltipText; If you don't want to write to file, leave this field empty
+defaultLocBText; Find mappe
+getFileBText; Find fil
+printLTextCode; Kodeplacering
+printLTextSystem; Systemplacering
+writeLocXTooltipText; Koordinater 0,0 er placeret i nederste venstre side af dokumentet
+writeLocYTooltipText; Koordinater 0,0 er placeret i nederste venstre side af dokumentet
+pdfPreviewBText; Eksempel udskrift
+cancelSettingBText; Annullerer
+mSubSettingText; Indstillinger
+mPrintSettingsText; Udskriftsindstillinger
+mPrintSettingsToolTipText; Indstillinger for hvor du skal udskrive systemet og kode, hvis de skal udskrives.
+languageText; Sprog.
+inputError; Missing input.
+inputErrorMS; Ingen input givet.
+findSystem; Find !control!.
+systemFoundMS; !control! !gui.getSearchControlTF().getText() har pin: !fSPin.
+systemNotFound; !control! ikke fundet.
+systemNotFoundMS; !control! !gui.getSearchControlTF().getText() findes ikke i databasen.
+errorUsedNumber; !control!number er allerede brugt.
+errorUsedNumberMS; !control! !gui.getControlTF().getText() er allerede i brug.
+controlAdded; !control! Tilføjet.
+controlAddedMS; !control! !gui.getControlTF().getText() er blevet tilføjet med pin:
+confirmRemoval; Bekræft fjernelse.
+confirmRemovalMS; Bekræft fjernelse af:
+pinReplacementConfirm; Bekræft udskiftning af pin.
+pinReplacementConfirmMS; Bekræft udskiftning af pin til !control!:
+noSettingsError; Ingen indstillinger fundet.
+noSettingsErrorMS; Der er ikke blevet fundet nogen indstilling.<br> Indstillinger er sat til default.<br> Det anbefales du ændre disse før du forsætter.

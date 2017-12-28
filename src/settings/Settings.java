@@ -95,7 +95,7 @@ public class Settings {
 			out.write("systemLoc" + ";" + systemLocX + "," + systemLocY + "\n");
 			out.write("codeLength" + ";" + codeLength + "\n");
 			out.write("codeType" + ";" + codeType + "\n");
-			out.write("language" + "," + language + "\n");
+			out.write("language" + ";" + language + "\n");
 			out.close();
 		} catch (FileNotFoundException e) {
 			File dir = new File(ownLoc + "/PinGen");

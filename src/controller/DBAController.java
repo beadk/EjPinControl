@@ -63,11 +63,11 @@ public class DBAController {
 			reader.close();
 		} catch (FileNotFoundException ex) {
 			gui.dbError();
-			gui.getComfirmCreateB().addActionListener(new ActionListener() {
+			gui.getConfirmCreateB().addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
 						cont.newDB();
-						gui.getComfirmRemovalFrame().dispose();
+						gui.getConfirmRemovalFrame().dispose();
 					} catch (Exception e1) {
 						err.printError(ownLoc, e1);
 					}

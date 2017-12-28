@@ -28,30 +28,31 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.SoftBevelBorder;
-import javax.swing.table.JTableHeader;
 
 import DTO.SingleCodeDTO;
 
 public class GUI {
-	private JFrame comfirmRemovalFrame;
-	private JFrame frame, frameCodeSettings, frameAddControl, bSFrame, frameGeneralSettings;
+	private JFrame confirmRemovalFrame;
+	private JFrame frame, frameCodeSettings, frameAddControl, bSFrame,
+			frameGeneralSettings;
 	private JPanel panel, panelSettings, panelAddControl, bSPanel, systemPanel;
 	private JComboBox<Object> codeType, language;
 	private JButton newCodeB, saveCodeB, searchControlB, removeControlB,
-			replaceCodeB, comfirmRemovalB, noButton, pdfPreviewB, getFileB,
+			replaceCodeB, confirmRemovalB, noButton, pdfPreviewB, getFileB,
 			saveSettingsB, cancelSettingB, defaultSettingB, defaultLocB,
 			addSystemB, cancelB, emailErrB, emailErrC;
 	private JTextField codeTF, controlTF, searchControlTF, removeControlTF,
 			replaceCodeTF, fileLocTF, codeLocX, codeLocY, defaultLocTF,
 			codeLengthF, emailErrF, systemLocX, systemLocY;
 	private JLabel dbName, codeLabel, controlItemLabel, emailErrL,
-			emailErrDesL,languageLabel;
+			emailErrDesL, languageLabel;
 	private JTextArea emailErrDesF;
 	private Object[] languages;
 	JMenuBar menu;
 	JFileChooser chooser;
 	JMenu mFile, mHelp, mSettings, mSubSettings;
-	JMenuItem mExit, mGSettings, mPrintPreview, mRestoDB, mCodeSettings, mPrintSettings;
+	JMenuItem mExit, mGSettings, mPrintPreview, mRestoDB, mCodeSettings,
+			mPrintSettings;
 	private String mFileText;
 	private String mSettingsText;
 	private String mCodeSettingsText;
@@ -100,13 +101,13 @@ public class GUI {
 	private String emailErrDesLText;
 	private String emailErrBText;
 	private String emailErrCText;
-	private String comfirmRemovalBText;
+	private String confirmRemovalBText;
 	private String noButtonText;
 	private String dbNotFoundText;
 	private JLabel dbNotFoundL;
 	private String dbNotFoundLText;
-	private JButton comfirmCreateB;
-	private String comfirmCreateBText;
+	private JButton confirmCreateB;
+	private String confirmCreateBText;
 	private JButton dbErrorBCreateBackup;
 	private String dbErrorBCreateBackupText;
 	private JLabel labelDefault;
@@ -132,6 +133,21 @@ public class GUI {
 	private String languageText;
 	private String frameGeneralSettingsText;
 	private String inputError;
+	private String inputErrorMS;
+	private String findSystem;
+	private String systemFoundMS;
+	private String systemNotFound;
+	private String systemNotFoundMS;
+	private String errorUsedNumber;
+	private String errorUsedNumberMS;
+	private String controlAdded;
+	private String controlAddedMS;
+	private String confirmRemoval;
+	private String confirmRemovalMS;
+	private String pinReplacementConfirm;
+	private String pinReplacementConfirmMS;
+	private String noSettingsError;
+	private String noSettingsErrorMS;
 
 	public void mainGUI(String name) {
 		frame = new JFrame(name);
@@ -161,7 +177,7 @@ public class GUI {
 		mSettings.setMnemonic(KeyEvent.VK_I);
 
 		mSubSettings = new JMenu(mSubSettingText);
-		
+
 		mCodeSettings = new JMenuItem(mCodeSettingsText);
 		mCodeSettings.setMnemonic(KeyEvent.VK_O);
 		mCodeSettings.setToolTipText(mCodeSettingsToolTipText);
@@ -175,13 +191,13 @@ public class GUI {
 		mGSettings.setMnemonic(KeyEvent.VK_P);
 		mGSettings.setAccelerator(printKeyStroke);
 		mGSettings.setToolTipText(mGSettingsToolTipText);
-		
+
 		KeyStroke printKeyStroke2 = KeyStroke.getKeyStroke("crtl P");
 		mPrintSettings = new JMenuItem(mPrintSettingsText);
 		mPrintSettings.setMnemonic(KeyEvent.VK_P);
 		mPrintSettings.setAccelerator(printKeyStroke2);
 		mPrintSettings.setToolTipText(mPrintSettingsToolTipText);
-		
+
 		mPrintPreview = new JMenuItem(mPrintPreviewText);
 		mPrintPreview.setMnemonic(KeyEvent.VK_P);
 		mPrintPreview.setToolTipText(mPrintPreviewTooltipText);
@@ -245,7 +261,7 @@ public class GUI {
 		panel.add(replaceCodeTF);
 
 		codeTF = new JTextField(defaultCodeValue);
-		codeTF.setToolTipText(codeTFTooltipText);
+		codeTF.setToolTipText("<html>" + codeTFTooltipText + "</html>");
 
 		controlTF = new JTextField(controlDefaultValue);
 		controlTF.setToolTipText(controlTFTooltipText);
@@ -277,7 +293,7 @@ public class GUI {
 				frameCodeSettings.getHeight());
 		panelSettings.revalidate();
 	}
-	
+
 	public void resizeFrameGeneralSettings() {
 		panelSettings.setBounds(0, 0, frameGeneralSettings.getWidth(),
 				frameGeneralSettings.getHeight());
@@ -290,7 +306,7 @@ public class GUI {
 		panelAddControl.revalidate();
 	}
 
-	public void ShowAllCodes(List<SingleCodeDTO> systems){
+	public void ShowAllCodes(List<SingleCodeDTO> systems) {
 		JFrame frameShowAll = new JFrame(frameAddControlText);
 		frameShowAll.setMinimumSize(new Dimension(500, 300));
 
@@ -298,25 +314,26 @@ public class GUI {
 		panelShowAll.setBounds(10, 10, frameShowAll.getWidth() - 35,
 				frameShowAll.getHeight() - 60);
 		panelShowAll.setBackground(new Color(250, 250, 250));
-		panelShowAll.setBorder(new SoftBevelBorder(BevelBorder.LOWERED,
-				null, null, null, null));
+		panelShowAll.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null,
+				null, null, null));
 		panelShowAll.setLayout(null);
 		frameShowAll.getContentPane().add(panelShowAll);
-		
-		String header[] = {"System","Code","Placement"};
-		
+
+		String header[] = { "System", "Code", "Placement" };
+
 		Object[][] codesO = new Object[systems.size()][3];
-		
-		for(int i = 0;i<systems.size();i++){
+
+		for (int i = 0; i < systems.size(); i++) {
 			codesO[i][0] = systems.get(i).getSystemNummer();
 			codesO[i][1] = systems.get(i).getPinKode();
-			if(!systems.get(i).getPosition().equals("")){
+			if (!systems.get(i).getPosition().equals("")) {
 				codesO[i][2] = systems.get(i).getPosition();
 			}
 		}
-		
+
 		JPanel tablePanel = new JPanel();
-		tablePanel.setBounds(20, 20, panelShowAll.getWidth()-20, panelShowAll.getHeight()-20);
+		tablePanel.setBounds(20, 20, panelShowAll.getWidth() - 20,
+				panelShowAll.getHeight() - 20);
 		panelShowAll.add(tablePanel);
 
 		JTable codes = new JTable(codesO, header);
@@ -327,20 +344,22 @@ public class GUI {
 		tablePanel.add(codes);
 		codes.revalidate();
 		tablePanel.revalidate();
-		codes.getColumnModel().getColumn(0).setPreferredWidth((tablePanel.getWidth()-10)/2);
-		codes.getColumnModel().getColumn(1).setPreferredWidth((tablePanel.getWidth()-10)/2);
+		codes.getColumnModel().getColumn(0)
+				.setPreferredWidth((tablePanel.getWidth() - 10) / 2);
+		codes.getColumnModel().getColumn(1)
+				.setPreferredWidth((tablePanel.getWidth() - 10) / 2);
 
 		panelShowAll.revalidate();
 		frameShowAll.revalidate();
 		frameShowAll.validate();
-		
+
 		frameShowAll.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frameShowAll.getContentPane().setLayout(null);
 		frameShowAll.setLocationRelativeTo(null);
 		frameShowAll.setVisible(true);
 		frameShowAll.pack();
 	}
-	
+
 	public void addControl() {
 		frameAddControl = new JFrame(frameAddControlText);
 		frameAddControl.setMinimumSize(new Dimension(500, 300));
@@ -405,7 +424,8 @@ public class GUI {
 
 		codeLengthF = new JTextField(codeLengthFText);
 		codeLengthF.setBounds(130, 10, 100, 20);
-		codeLengthF.setToolTipText(codeLengthFTextTooltipText);
+		codeLengthF.setToolTipText("<html>" + codeLengthFTextTooltipText
+				+ "</html>");
 
 		codeStrengthL = new JLabel(codeStrengthLText);
 		codeStrengthL.setBounds(10, 50, 100, 20);
@@ -413,7 +433,7 @@ public class GUI {
 		codeType = new JComboBox<Object>();
 		codeType.setModel(new DefaultComboBoxModel<Object>(codeTypeArrayText));
 		codeType.setBounds(130, 50, 200, 20);
-		codeType.setToolTipText(codeTypeTooltipText);
+		codeType.setToolTipText("<html>" + codeTypeTooltipText + "</html>");
 
 		panelSettings.add(codeLengthL);
 		panelSettings.add(codeLengthF);
@@ -469,7 +489,7 @@ public class GUI {
 		bSPanel.setBounds(10, 10, bSFrame.getWidth() - 40,
 				bSFrame.getHeight() - 60);
 		bSFrame.add(bSPanel);
-		JLabel bSLabel = new JLabel(errorMessage);
+		JLabel bSLabel = new JLabel("<html>" + errorMessage + "</html>");
 		bSLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		bSLabel.setBounds(bSFrame.getWidth() / 2, bSFrame.getHeight() / 2, 200,
 				90);
@@ -552,106 +572,107 @@ public class GUI {
 		addFrame.pack();
 	}
 
-	public void comfirmFrame(String comfirmTitle, String comfirmMessage) {
-		comfirmRemovalFrame = new JFrame(comfirmTitle);
-		comfirmRemovalFrame.setMinimumSize(new Dimension(385, 150));
+	public void confirmFrame(String confirmTitle, String confirmMessage) {
+		confirmRemovalFrame = new JFrame(confirmTitle);
+		confirmRemovalFrame.setMinimumSize(new Dimension(385, 150));
 		JPanel bekæftFjernelsePanel = new JPanel();
 		bekæftFjernelsePanel.setBackground(new Color(250, 250, 250));
 		bekæftFjernelsePanel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED,
 				null, null, null, null));
 		bekæftFjernelsePanel.setBounds(10, 10,
-				comfirmRemovalFrame.getWidth() - 35,
-				comfirmRemovalFrame.getHeight() - 40);
-		comfirmRemovalFrame.add(bekæftFjernelsePanel);
-		JLabel bFLabel = new JLabel(comfirmMessage);
+				confirmRemovalFrame.getWidth() - 35,
+				confirmRemovalFrame.getHeight() - 40);
+		confirmRemovalFrame.add(bekæftFjernelsePanel);
+		JLabel bFLabel = new JLabel(confirmMessage);
 		bFLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		bFLabel.setBounds(comfirmRemovalFrame.getWidth() / 2,
-				(comfirmRemovalFrame.getHeight() - 40) / 2, 200, 20);
+		bFLabel.setBounds(confirmRemovalFrame.getWidth() / 2,
+				(confirmRemovalFrame.getHeight() - 40) / 2, 200, 20);
 		bekæftFjernelsePanel.add(bFLabel);
 
-		comfirmRemovalB = new JButton(comfirmRemovalBText);
-		comfirmRemovalB.setBounds((comfirmRemovalFrame.getWidth() - 40) / 2,
+		confirmRemovalB = new JButton(confirmRemovalBText);
+		confirmRemovalB.setBounds((confirmRemovalFrame.getWidth() - 40) / 2,
 				200, 60, 20);
-		bekæftFjernelsePanel.add(comfirmRemovalB);
+		bekæftFjernelsePanel.add(confirmRemovalB);
 
 		noButton = new JButton(noButtonText);
-		noButton.setBounds((comfirmRemovalFrame.getWidth() + 40) / 2, 200, 60,
+		noButton.setBounds((confirmRemovalFrame.getWidth() + 40) / 2, 200, 60,
 				20);
 		bekæftFjernelsePanel.add(noButton);
 
-		comfirmRemovalFrame.getContentPane().setLayout(null);
-		comfirmRemovalFrame.setLocationRelativeTo(null);
-		comfirmRemovalFrame.setVisible(true);
-		comfirmRemovalFrame.pack();
+		confirmRemovalFrame.getContentPane().setLayout(null);
+		confirmRemovalFrame.setLocationRelativeTo(null);
+		confirmRemovalFrame.setVisible(true);
+		confirmRemovalFrame.pack();
 	}
 
 	public void dbError() {
-		comfirmRemovalFrame = new JFrame(dbNotFoundText);
-		comfirmRemovalFrame.setMinimumSize(new Dimension(385, 150));
+		confirmRemovalFrame = new JFrame(dbNotFoundText);
+		confirmRemovalFrame.setMinimumSize(new Dimension(385, 150));
 		JPanel bekæftFjernelsePanel = new JPanel();
 		bekæftFjernelsePanel.setBackground(new Color(250, 250, 250));
 		bekæftFjernelsePanel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED,
 				null, null, null, null));
 		bekæftFjernelsePanel.setBounds(10, 10,
-				comfirmRemovalFrame.getWidth() - 35,
-				comfirmRemovalFrame.getHeight() - 40);
-		comfirmRemovalFrame.add(bekæftFjernelsePanel);
+				confirmRemovalFrame.getWidth() - 35,
+				confirmRemovalFrame.getHeight() - 40);
+		confirmRemovalFrame.add(bekæftFjernelsePanel);
 		dbNotFoundL = new JLabel(dbNotFoundLText);
 		dbNotFoundL.setHorizontalAlignment(SwingConstants.CENTER);
-		dbNotFoundL.setBounds(comfirmRemovalFrame.getWidth() / 2,
-				(comfirmRemovalFrame.getHeight() - 40) / 2, 200, 20);
+		dbNotFoundL.setBounds(confirmRemovalFrame.getWidth() / 2,
+				(confirmRemovalFrame.getHeight() - 40) / 2, 200, 20);
 		bekæftFjernelsePanel.add(dbNotFoundL);
 
-		comfirmCreateB = new JButton(comfirmCreateBText);
-		comfirmCreateB.setBounds((comfirmRemovalFrame.getWidth() - 40) / 2,
+		confirmCreateB = new JButton(confirmCreateBText);
+		confirmCreateB.setBounds((confirmRemovalFrame.getWidth() - 40) / 2,
 				200, 60, 20);
-		bekæftFjernelsePanel.add(comfirmCreateB);
+		bekæftFjernelsePanel.add(confirmCreateB);
 
 		dbErrorBCreateBackup = new JButton(dbErrorBCreateBackupText);
 		dbErrorBCreateBackup.setBounds(
-				(comfirmRemovalFrame.getWidth() + 40) / 2, 200, 60, 20);
+				(confirmRemovalFrame.getWidth() + 40) / 2, 200, 60, 20);
 		bekæftFjernelsePanel.add(dbErrorBCreateBackup);
 
-		comfirmRemovalFrame.getContentPane().setLayout(null);
-		comfirmRemovalFrame.setLocationRelativeTo(null);
-		comfirmRemovalFrame.setVisible(true);
-		comfirmRemovalFrame.pack();
+		confirmRemovalFrame.getContentPane().setLayout(null);
+		confirmRemovalFrame.setLocationRelativeTo(null);
+		confirmRemovalFrame.setVisible(true);
+		confirmRemovalFrame.pack();
 	}
 
-	public void exceptionFrame(String comfirmTitle, String comfirmMessage) {
-		comfirmRemovalFrame = new JFrame(comfirmTitle);
-		comfirmRemovalFrame.setMinimumSize(new Dimension(1500, 500));
+	public void exceptionFrame(String confirmTitle, String confirmMessage) {
+		confirmRemovalFrame = new JFrame(confirmTitle);
+		confirmRemovalFrame.setMinimumSize(new Dimension(1500, 500));
 		JPanel bekæftFjernelsePanel = new JPanel();
 		bekæftFjernelsePanel.setBackground(new Color(250, 250, 250));
 		bekæftFjernelsePanel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED,
 				null, null, null, null));
 		bekæftFjernelsePanel.setBounds(10, 10,
-				comfirmRemovalFrame.getWidth() - 35,
-				comfirmRemovalFrame.getHeight() - 40);
-		comfirmRemovalFrame.add(bekæftFjernelsePanel);
-		JLabel bFLabel = new JLabel(comfirmMessage);
+				confirmRemovalFrame.getWidth() - 35,
+				confirmRemovalFrame.getHeight() - 40);
+		confirmRemovalFrame.add(bekæftFjernelsePanel);
+		JLabel bFLabel = new JLabel(confirmMessage);
 		bFLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		bFLabel.setBounds(comfirmRemovalFrame.getWidth() / 2,
-				(comfirmRemovalFrame.getHeight() - 40) / 2, 200, 20);
+		bFLabel.setBounds(confirmRemovalFrame.getWidth() / 2,
+				(confirmRemovalFrame.getHeight() - 40) / 2, 200, 20);
 		bekæftFjernelsePanel.add(bFLabel);
 
-		comfirmRemovalB = new JButton(comfirmCreateBText);
-		comfirmRemovalB.setBounds((comfirmRemovalFrame.getWidth() - 40) / 2,
+		confirmRemovalB = new JButton(confirmCreateBText);
+		confirmRemovalB.setBounds((confirmRemovalFrame.getWidth() - 40) / 2,
 				200, 60, 20);
-		bekæftFjernelsePanel.add(comfirmRemovalB);
+		bekæftFjernelsePanel.add(confirmRemovalB);
 
 		noButton = new JButton(noButtonText);
-		noButton.setBounds((comfirmRemovalFrame.getWidth() + 40) / 2, 200, 60,
+		noButton.setBounds((confirmRemovalFrame.getWidth() + 40) / 2, 200, 60,
 				20);
 		bekæftFjernelsePanel.add(noButton);
 
-		comfirmRemovalFrame.getContentPane().setLayout(null);
-		comfirmRemovalFrame.setLocationRelativeTo(null);
-		comfirmRemovalFrame.setVisible(true);
-		comfirmRemovalFrame.pack();
+		confirmRemovalFrame.getContentPane().setLayout(null);
+		confirmRemovalFrame.setLocationRelativeTo(null);
+		confirmRemovalFrame.setVisible(true);
+		confirmRemovalFrame.pack();
 	}
 
-	public void settingsGUI(String defaultLoc, String fileLoc) {
+	public void settingsGUI(String defaultLoc, String fileLoc,
+			String selectedLanguage) {
 		frameGeneralSettings = new JFrame(frameGeneralSettingsText);
 		frameGeneralSettings.setMinimumSize(new Dimension(585, 360));
 		panelSettings = new JPanel();
@@ -674,21 +695,27 @@ public class GUI {
 		filePlaceL.setHorizontalAlignment(SwingConstants.CENTER);
 		filePlaceL.setBounds(15, 70, 100, 20);
 		panelSettings.add(filePlaceL);
-		
+
 		fileLocTF = new JTextField(fileLocTFDefaultValue);
 		fileLocTF.setBounds(130, 70, 250, 20);
 		fileLocTF.setToolTipText(fileLocTFTooltipText);
 		panelSettings.add(fileLocTF);
 
 		languageLabel = new JLabel(languageText);
-		languageLabel.setBounds(15,110,100,20);
+		languageLabel.setBounds(15, 110, 100, 20);
 		panelSettings.add(languageLabel);
-		
+
 		language = new JComboBox<Object>();
 		language.setModel(new DefaultComboBoxModel<Object>(languages));
+		for (int i = 0; i < languages.length; i++) {
+			if (languages[i].toString().equals(selectedLanguage)) {
+				language.setSelectedIndex(i);;
+				break;
+			}
+		}
 		language.setBounds(130, 110, 250, 20);
 		panelSettings.add(language);
-		
+
 		defaultLocB = new JButton(defaultLocBText);
 		defaultLocB.setBounds(400, 30, 100, 20);
 		panelSettings.add(defaultLocB);
@@ -708,7 +735,7 @@ public class GUI {
 		defaultSettingB = new JButton(defaultSettingBText);
 		defaultSettingB.setBounds(345, 190, 145, 20);
 		panelSettings.add(defaultSettingB);
-		
+
 		if (defaultLoc == null) {
 			fileLocTF.setText("");
 			defaultLocTF.setText("");
@@ -725,8 +752,8 @@ public class GUI {
 		frameGeneralSettings.pack();
 	}
 
-	public void printSettingGUI(float fCodeLocX,
-			float fCodeLocY, float fSystemLocX, float fSystemLocY) {
+	public void printSettingGUI(float fCodeLocX, float fCodeLocY,
+			float fSystemLocX, float fSystemLocY) {
 		frameCodeSettings = new JFrame(frameCodeSettingsText);
 		frameCodeSettings.setMinimumSize(new Dimension(585, 360));
 		systemPanel = new JPanel();
@@ -740,25 +767,25 @@ public class GUI {
 		printLSystem = new JLabel(printLTextSystem);
 		printLSystem.setBounds(15, 30, 120, 20);
 		systemPanel.add(printLSystem);
-		
+
 		JLabel labelSX = new JLabel("X: ");
 		labelSX.setBounds(150, 30, 20, 20);
 		systemPanel.add(labelSX);
-		
-		systemLocX = new JTextField(fSystemLocX+"");
+
+		systemLocX = new JTextField(fSystemLocX + "");
 		systemLocX.setBounds(180, 30, 100, 20);
 		systemLocX.setToolTipText(writeLocXTooltipText);
 		systemPanel.add(systemLocX);
-		
+
 		JLabel labelSY = new JLabel("Y: ");
-		labelSY.setBounds(150,70,20,20);
+		labelSY.setBounds(150, 70, 20, 20);
 		systemPanel.add(labelSY);
-		
-		systemLocY = new JTextField(fSystemLocY+"");
+
+		systemLocY = new JTextField(fSystemLocY + "");
 		systemLocY.setBounds(180, 70, 100, 20);
 		systemLocY.setToolTipText(writeLocYTooltipText);
 		systemPanel.add(systemLocY);
-		
+
 		printLCode = new JLabel(printLTextCode);
 		printLCode.setBounds(15, 110, 120, 20);
 		systemPanel.add(printLCode);
@@ -767,7 +794,7 @@ public class GUI {
 		labelX.setBounds(150, 110, 20, 20);
 		systemPanel.add(labelX);
 
-		codeLocX = new JTextField(fCodeLocX+"");
+		codeLocX = new JTextField(fCodeLocX + "");
 		codeLocX.setBounds(180, 110, 100, 20);
 		codeLocX.setToolTipText(writeLocXTooltipText);
 		systemPanel.add(codeLocX);
@@ -776,7 +803,7 @@ public class GUI {
 		labelY.setBounds(150, 150, 20, 20);
 		systemPanel.add(labelY);
 
-		codeLocY = new JTextField(fCodeLocY+"");
+		codeLocY = new JTextField(fCodeLocY + "");
 		codeLocY.setBounds(180, 150, 100, 20);
 		codeLocY.setToolTipText(writeLocYTooltipText);
 		systemPanel.add(codeLocY);
@@ -805,12 +832,12 @@ public class GUI {
 		frameCodeSettings.pack();
 	}
 
-	public JFrame getComfirmRemovalFrame() {
-		return comfirmRemovalFrame;
+	public JFrame getConfirmRemovalFrame() {
+		return confirmRemovalFrame;
 	}
 
-	public void setComfirmRemovalFrame(JFrame comfirmRemovalFrame) {
-		this.comfirmRemovalFrame = comfirmRemovalFrame;
+	public void setConfirmRemovalFrame(JFrame confirmRemovalFrame) {
+		this.confirmRemovalFrame = confirmRemovalFrame;
 	}
 
 	public JFrame getFrame() {
@@ -917,12 +944,12 @@ public class GUI {
 		this.replaceCodeB = replaceCodeB;
 	}
 
-	public JButton getComfirmRemovalB() {
-		return comfirmRemovalB;
+	public JButton getConfirmRemovalB() {
+		return confirmRemovalB;
 	}
 
-	public void setComfirmRemovalB(JButton comfirmRemovalB) {
-		this.comfirmRemovalB = comfirmRemovalB;
+	public void setConfirmRemovalB(JButton confirmRemovalB) {
+		this.confirmRemovalB = confirmRemovalB;
 	}
 
 	public JButton getNoButton() {
@@ -1597,12 +1624,12 @@ public class GUI {
 		this.emailErrCText = emailErrCText;
 	}
 
-	public String getComfirmRemovalBText() {
-		return comfirmRemovalBText;
+	public String getConfirmRemovalBText() {
+		return confirmRemovalBText;
 	}
 
-	public void setComfirmRemovalBText(String comfirmRemovalBText) {
-		this.comfirmRemovalBText = comfirmRemovalBText;
+	public void setConfirmRemovalBText(String confirmRemovalBText) {
+		this.confirmRemovalBText = confirmRemovalBText;
 	}
 
 	public String getNoButtonText() {
@@ -1637,20 +1664,20 @@ public class GUI {
 		this.dbNotFoundLText = dbNotFoundLText;
 	}
 
-	public JButton getComfirmCreateB() {
-		return comfirmCreateB;
+	public JButton getConfirmCreateB() {
+		return confirmCreateB;
 	}
 
-	public void setComfirmCreateB(JButton comfirmCreateB) {
-		this.comfirmCreateB = comfirmCreateB;
+	public void setConfirmCreateB(JButton confirmCreateB) {
+		this.confirmCreateB = confirmCreateB;
 	}
 
-	public String getComfirmCreateBText() {
-		return comfirmCreateBText;
+	public String getConfirmCreateBText() {
+		return confirmCreateBText;
 	}
 
-	public void setComfirmCreateBText(String comfirmCreateBText) {
-		this.comfirmCreateBText = comfirmCreateBText;
+	public void setConfirmCreateBText(String confirmCreateBText) {
+		this.confirmCreateBText = confirmCreateBText;
 	}
 
 	public JButton getDbErrorBCreateBackup() {
@@ -1947,6 +1974,126 @@ public class GUI {
 
 	public void setInputError(String inputError) {
 		this.inputError = inputError;
+	}
+
+	public String getFindSystem() {
+		return findSystem;
+	}
+
+	public void setFindSystem(String findSystem) {
+		this.findSystem = findSystem;
+	}
+
+	public String getSystemFoundMS() {
+		return systemFoundMS;
+	}
+
+	public void setSystemFoundMS(String systemFoundMS) {
+		this.systemFoundMS = systemFoundMS;
+	}
+
+	public String getSystemNotFound() {
+		return systemNotFound;
+	}
+
+	public void setSystemNotFound(String systemNotFound) {
+		this.systemNotFound = systemNotFound;
+	}
+
+	public String getSystemNotFoundMS() {
+		return systemNotFoundMS;
+	}
+
+	public void setSystemNotFoundMS(String systemNotFoundMS) {
+		this.systemNotFoundMS = systemNotFoundMS;
+	}
+
+	public String getErrorUsedNumber() {
+		return errorUsedNumber;
+	}
+
+	public void setErrorUsedNumber(String errorUsedNumber) {
+		this.errorUsedNumber = errorUsedNumber;
+	}
+
+	public String getErrorUsedNumberMS() {
+		return errorUsedNumberMS;
+	}
+
+	public void setErrorUsedNumberMS(String errorUsedNumberMS) {
+		this.errorUsedNumberMS = errorUsedNumberMS;
+	}
+
+	public String getControlAdded() {
+		return controlAdded;
+	}
+
+	public void setControlAdded(String controlAdded) {
+		this.controlAdded = controlAdded;
+	}
+
+	public String getControlAddedMS() {
+		return controlAddedMS;
+	}
+
+	public void setControlAddedMS(String controlAddedMS) {
+		this.controlAddedMS = controlAddedMS;
+	}
+
+	public String getConfirmRemoval() {
+		return confirmRemoval;
+	}
+
+	public void setConfirmRemoval(String confirmRemoval) {
+		this.confirmRemoval = confirmRemoval;
+	}
+
+	public String getConfirmRemovalMS() {
+		return confirmRemovalMS;
+	}
+
+	public void setConfirmRemovalMS(String confirmRemovalMS) {
+		this.confirmRemovalMS = confirmRemovalMS;
+	}
+
+	public String getInputErrorMS() {
+		return inputErrorMS;
+	}
+
+	public void setInputErrorMS(String inputErrorMS) {
+		this.inputErrorMS = inputErrorMS;
+	}
+
+	public String getPinReplacementConfirm() {
+		return pinReplacementConfirm;
+	}
+
+	public void setPinReplacementConfirm(String pinReplacementConfirm) {
+		this.pinReplacementConfirm = pinReplacementConfirm;
+	}
+
+	public String getPinReplacementConfirmMS() {
+		return pinReplacementConfirmMS;
+	}
+
+	public void setPinReplacementConfirmMS(String pinReplacementConfirmMS) {
+		this.pinReplacementConfirmMS = pinReplacementConfirmMS;
+	}
+
+	public String getNoSettingsError() {
+		return noSettingsError;
+	}
+
+	public void setNoSettingsError(String noSettingsError) {
+		this.noSettingsError = noSettingsError;
+	}
+
+	public String getNoSettingsErrorMS() {
+		return noSettingsErrorMS;
+	}
+
+	public void setNoSettingsErrorMS(String noSettingsErrorMS) {
+		this.noSettingsErrorMS = noSettingsErrorMS;
 	}
 
 }
