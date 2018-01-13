@@ -148,6 +148,8 @@ public class GUI {
 	private String pinReplacementConfirmMS;
 	private String noSettingsError;
 	private String noSettingsErrorMS;
+	private String pinReplaced;
+	private String pinReplacedMS;
 
 	public void mainGUI(String name) {
 		frame = new JFrame(name);
@@ -345,9 +347,9 @@ public class GUI {
 		codes.revalidate();
 		tablePanel.revalidate();
 		codes.getColumnModel().getColumn(0)
-				.setPreferredWidth((tablePanel.getWidth() - 10) / 2);
+				.setPreferredWidth((tablePanel.getWidth() - 10) / 3);
 		codes.getColumnModel().getColumn(1)
-				.setPreferredWidth((tablePanel.getWidth() - 10) / 2);
+				.setPreferredWidth((tablePanel.getWidth() - 10) / 3);
 
 		panelShowAll.revalidate();
 		frameShowAll.revalidate();
@@ -709,7 +711,8 @@ public class GUI {
 		language.setModel(new DefaultComboBoxModel<Object>(languages));
 		for (int i = 0; i < languages.length; i++) {
 			if (languages[i].toString().equals(selectedLanguage)) {
-				language.setSelectedIndex(i);;
+				language.setSelectedIndex(i);
+				;
 				break;
 			}
 		}
@@ -2094,6 +2097,22 @@ public class GUI {
 
 	public void setNoSettingsErrorMS(String noSettingsErrorMS) {
 		this.noSettingsErrorMS = noSettingsErrorMS;
+	}
+
+	public String getPinReplaced() {
+		return pinReplaced;
+	}
+
+	public void setPinReplaced(String pinReplaced) {
+		this.pinReplaced = pinReplaced;
+	}
+
+	public String getPinReplacedMS() {
+		return pinReplacedMS;
+	}
+
+	public void setPinReplacedMS(String pinReplacedMS) {
+		this.pinReplacedMS = pinReplacedMS;
 	}
 
 }

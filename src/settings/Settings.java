@@ -65,8 +65,8 @@ public class Settings {
 	public void updateGSettings(String newDefaultLoc, String newFileLoc, String ownLoc, String language) {
 		defaultLoc = newDefaultLoc;
 		fileLoc = newFileLoc;
-		writeSettings(ownLoc);
 		this.language = language;
+		writeSettings(ownLoc);
 	}
 
 	public void updatePrintSettings(String newCodeLoc, String newSystemLoc){

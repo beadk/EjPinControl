@@ -52,7 +52,7 @@ public class Controller {
 
 			if (language.equals("English")) {
 				textImp.readDefault();
-			} else if(language.equals("Danish")){
+			} else if (language.equals("Danish")) {
 				textImp.readDansk();
 			}
 			if (defaultLoc != null) {
@@ -62,10 +62,12 @@ public class Controller {
 				err.errorGUIConnect(gui);
 				readLanguage();
 				ready();
-				System.out.println(defaultLoc);
 				dba.start(defaultLoc, ownLoc, cryp, gui, err, new Controller());
 				List<SingleCodeDTO> temp = dba.GetCodes();
 				temp.clear();
+				if (gui.getbSFrame() != null) {
+					gui.getbSFrame().toFront();
+				}
 			}
 		} catch (Exception e) {
 			err.printError(ownLoc, e);
@@ -171,7 +173,7 @@ public class Controller {
 					|| gui.getCodeLocX().getText().equals("")
 					|| gui.getCodeLocY().getText().equals("")) {
 				errorTitle = gui.getInputError();
-				errorMessage = gui.getInputError();
+				errorMessage = gui.getInputErrorMS();
 				gui.errorWindow(errorTitle, errorMessage);
 			} else {
 				try {
@@ -196,7 +198,7 @@ public class Controller {
 			if (gui.getDefaultLocTF().getText().equals("")
 					|| gui.getFileLocTF().getText().equals("")) {
 				errorTitle = gui.getInputError();
-				errorMessage = gui.getInputError();
+				errorMessage = gui.getInputErrorMS();
 				gui.errorWindow(errorTitle, errorMessage);
 			} else {
 				if (gui.getLanguage().getSelectedItem().toString()
@@ -286,23 +288,23 @@ public class Controller {
 						err.printError(ownLoc, e1);
 					}
 					String title = gui.getFindSystem();
-					String message = gui.getSystemFoundMS().replace(
-							gui.getSearchControlTF().getText(),
-							gui.getSearchControlTF().getText()
-									.replace("!fSPin", fSPin));
+					String message = gui
+							.getSystemFoundMS()
+							.replace("!gui.getSearchControlTF().getText()",
+									gui.getSearchControlTF().getText())
+							.replace("!fSPin", fSPin);
 					gui.addedWindow(title, message);
 					gui.getSearchControlTF().setText("");
 
 				} else if (gui.getSearchControlTF().getText().equals("")) {
 					errorTitle = gui.getInputError();
-					;
-					errorMessage = gui.getInputError();
-					;
+					errorMessage = gui.getInputErrorMS();
 					gui.errorWindow(errorTitle, errorMessage);
 				} else {
 					errorTitle = gui.getSystemNotFound();
-					;
-					errorMessage = gui.getSystemNotFoundMS();
+					errorMessage = gui.getSystemNotFoundMS().replace(
+							"!gui.getSearchControlTF().getText()",
+							gui.getSearchControlTF().getText());
 					gui.errorWindow(errorTitle, errorMessage);
 				}
 			} catch (Exception e1) {
@@ -391,7 +393,7 @@ public class Controller {
 				}
 			} else {
 				errorTitle = gui.getInputError();
-				errorMessage = gui.getInputError();
+				errorMessage = gui.getInputErrorMS();
 				gui.errorWindow(errorTitle, errorMessage);
 			}
 		}
@@ -399,16 +401,16 @@ public class Controller {
 
 	class bekæftFjernelse implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			gui.getRemoveControlTF().setText("");
-			gui.getConfirmRemovalFrame().dispatchEvent(
-					new WindowEvent(gui.getConfirmRemovalFrame(),
-							WindowEvent.WINDOW_CLOSING));
 			try {
 				genSkrivDataSheet(fjernSystem(gui.getRemoveControlTF()
 						.getText()), defaultLoc);
 			} catch (Exception e1) {
 				err.printError(ownLoc, e1);
 			}
+			gui.getRemoveControlTF().setText("");
+			gui.getConfirmRemovalFrame().dispatchEvent(
+					new WindowEvent(gui.getConfirmRemovalFrame(),
+							WindowEvent.WINDOW_CLOSING));
 		}
 	}
 
@@ -427,7 +429,9 @@ public class Controller {
 				try {
 					if (!findSystemCheck(gui.getRemoveControlTF().getText())) {
 						errorTitle = gui.getSystemNotFound();
-						errorMessage = gui.getSystemNotFoundMS();
+						errorMessage = gui.getSystemNotFoundMS().replace(
+								"!gui.getSearchControlTF().getText()",
+								gui.getSearchControlTF().getText());
 						gui.errorWindow(errorTitle, errorMessage);
 					} else {
 						confirmTitle = gui.getConfirmRemoval();
@@ -492,8 +496,17 @@ public class Controller {
 							new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
 									try {
-										ersatPin(gui.getReplaceCodeTF()
-												.getText());
+										String newPin = ersatPin(gui
+												.getReplaceCodeTF().getText());
+										String title = gui.getPinReplaced();
+										String message = gui
+												.getPinReplacedMS()
+												.replace(
+														"!gui.gui.getReplaceCodeTF().getText()",
+														gui.getReplaceCodeTF()
+																.getText())
+												+ " " + newPin;
+										gui.addedWindow(title, message);
 									} catch (Exception e1) {
 										err.printError(ownLoc, e1);
 									}
@@ -636,7 +649,7 @@ public class Controller {
 			dbname = settings.getDbname();
 		} catch (NullPointerException e) {
 			errorTitle = gui.getNoSettingsError();
-			errorMessage =gui.getNoSettingsErrorMS();
+			errorMessage = gui.getNoSettingsErrorMS();
 			gui.noSettings(errorTitle, errorMessage);
 			startDefault();
 		}
@@ -985,7 +998,6 @@ public class Controller {
 
 	public void genSkrivDataSheet(List<SingleCodeDTO> systems, String defaultLoc)
 			throws Exception {
-		System.out.println(defaultLoc);
 		String path = defaultLoc + "/PinGen/Dorma RS8";
 		try {
 			PrintWriter out = new PrintWriter(new BufferedWriter(
@@ -994,8 +1006,8 @@ public class Controller {
 				if (i == 0) {
 					out.write(encrypt("pin") + "," + encrypt("system") + "\n");
 				}
-				out.write(systems.get(i).getPinKode() + ","
-						+ systems.get(i).getSystemNummer() + "\n");
+				out.write(encrypt(systems.get(i).getPinKode()) + ","
+						+ encrypt(systems.get(i).getSystemNummer()) + "\n");
 			}
 			out.close();
 		} catch (IOException e) {
@@ -1448,7 +1460,8 @@ public class Controller {
 				gui.setPinReplacementConfirm(textImp.getPinReplacementConfirm());
 				break;
 			case "pinReplacementConfirmMS":
-				gui.setPinReplacementConfirmMS(textImp.getPinReplacementConfirmMS());
+				gui.setPinReplacementConfirmMS(textImp
+						.getPinReplacementConfirmMS());
 				break;
 			case "noSettingsError":
 				gui.setNoSettingsError(textImp.getNoSettingsError());
@@ -1456,6 +1469,13 @@ public class Controller {
 			case "noSettingsErrorMS":
 				gui.setNoSettingsErrorMS(textImp.getNoSettingsErrorMS());
 				break;
+			case "pinReplaced":
+				gui.setPinReplaced(textImp.getPinReplaced());
+				break;
+			case "pinReplacedMS":
+				gui.setPinReplacedMS(textImp.getPinReplacedMS());
+				break;
+
 			}
 		}
 	}

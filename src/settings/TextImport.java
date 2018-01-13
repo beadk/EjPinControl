@@ -1,15 +1,14 @@
 package settings;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.*;
 
 import DTO.FieldsDTO;
+import DTO.GUIText;
+import langauge.*;
 
 public class TextImport {
 
@@ -102,64 +101,50 @@ public class TextImport {
 	private String pinReplacementConfirmMS;
 	private String noSettingsError;
 	private String noSettingsErrorMS;
+	private String pinReplaced;
+	private String pinReplacedMS;
 	String[] tryA;
 
 	public void readDefault() {
-		try {
-			FileInputStream file = new FileInputStream("res/EnglishGUI.txt");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					file));
-			String line = reader.readLine();
-			while (line != null) {
-				tryA = line.split(";");
-				if (tryA[1].contains("!control!")) {
-					tryA[1] = tryA[1].replace("!control!", control);
-					setText(tryA);
-					fields.add(new FieldsDTO(tryA[0]));
-				} else if (tryA[1].contains("!dbname!")) {
-					tryA[1] = tryA[1].replace("!dbname!", dbname);
-					setText(tryA);
-					fields.add(new FieldsDTO(tryA[0]));
-				} else {
-					setText(tryA);
-					fields.add(new FieldsDTO(tryA[0]));
-				}
-				line = reader.readLine();
+		EnglishGUI eng = new EnglishGUI();
+		List<GUIText> text = eng.getEnglishGUI();
+		for (int i = 0; i < text.size(); i++) {
+			tryA = text.get(i).toRead().split(";");
+			if (tryA[1].contains("!control!")) {
+				tryA[1] = tryA[1].replace("!control!", control);
+				setText(tryA);
+				fields.add(new FieldsDTO(tryA[0]));
+			} else if (tryA[1].contains("!dbname!")) {
+				tryA[1] = tryA[1].replace("!dbname!", dbname);
+				setText(tryA);
+				fields.add(new FieldsDTO(tryA[0]));
+			} else {
+				setText(tryA);
+				fields.add(new FieldsDTO(tryA[0]));
 			}
-			reader.close();
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
-	public void readDansk(){
-		try {
-			FileInputStream file = new FileInputStream("res/DanskGUI.txt");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					file));
-			String line = reader.readLine();
-			while (line != null) {
-				tryA = line.split(";");
-				if (tryA[1].contains("!control!")) {
-					tryA[1] = tryA[1].replace("!control!", control);
-					setText(tryA);
-					fields.add(new FieldsDTO(tryA[0]));
-				} else if (tryA[1].contains("!dbname!")) {
-					tryA[1] = tryA[1].replace("!dbname!", dbname);
-					setText(tryA);
-					fields.add(new FieldsDTO(tryA[0]));
-				} else {
-					setText(tryA);
-					fields.add(new FieldsDTO(tryA[0]));
-				}
-				line = reader.readLine();
+	public void readDansk() {
+		DanishGUI dan = new DanishGUI();
+		List<GUIText> text = dan.getDanishGUI();
+		for (int i = 0; i < text.size(); i++) {
+			tryA = text.get(i).toRead().split(";");
+			if (tryA[1].contains("!control!")) {
+				tryA[1] = tryA[1].replace("!control!", control);
+				setText(tryA);
+				fields.add(new FieldsDTO(tryA[0]));
+			} else if (tryA[1].contains("!dbname!")) {
+				tryA[1] = tryA[1].replace("!dbname!", dbname);
+				setText(tryA);
+				fields.add(new FieldsDTO(tryA[0]));
+			} else {
+				setText(tryA);
+				fields.add(new FieldsDTO(tryA[0]));
 			}
-			reader.close();
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
-	
+
 	// public void readEnglishText(String path) {
 	// try {
 	// FileInputStream file = new FileInputStream(path + "/EnglishGUI.txt");
@@ -454,6 +439,12 @@ public class TextImport {
 			noSettingsErrorMS = text[1];
 			break;
 		default:
+		case "pinReplaced":
+			pinReplaced = text[1];
+			break;
+		case "pinReplacedMS":
+			pinReplacedMS = text[1];
+			break;
 		}
 	}
 
@@ -1177,5 +1168,21 @@ public class TextImport {
 	public void setNoSettingsErrorMS(String noSettingsErrorMS) {
 		this.noSettingsErrorMS = noSettingsErrorMS;
 	}
-	
+
+	public String getPinReplaced() {
+		return pinReplaced;
+	}
+
+	public void setPinReplaced(String pinReplaced) {
+		this.pinReplaced = pinReplaced;
+	}
+
+	public String getPinReplacedMS() {
+		return pinReplacedMS;
+	}
+
+	public void setPinReplacedMS(String pinReplacedMS) {
+		this.pinReplacedMS = pinReplacedMS;
+	}
+
 }
